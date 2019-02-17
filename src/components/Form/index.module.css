@@ -22,10 +22,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  outline: none;
 }
 
 .searchIcon {
   width: 15px;
+}
+
+@media only screen and (max-width: 800px) {
+  .submitForm {
+    width: 90%;
+  }
 }
 
 @media only screen and (max-width: 400px) {

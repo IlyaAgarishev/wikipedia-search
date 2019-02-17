@@ -39,6 +39,7 @@ class App extends Component {
   render() {
     return (
       <div className={styles.app}>
+        <div className={styles.logo}>wiki search</div>
         <Form
           setDataState={this.setDataState}
           setValueState={this.setValueState}

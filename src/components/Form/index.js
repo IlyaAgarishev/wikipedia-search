@@ -58,6 +58,7 @@ const Form = props => {
       }}
     >
       <input
+        required
         type="text"
         ref={ref => {
           textInput = ref;
