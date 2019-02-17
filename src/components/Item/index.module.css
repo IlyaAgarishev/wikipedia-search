@@ -1,10 +1,11 @@
 .item {
-  width: 38%;
+  width: 39%;
   border: 1px solid #573eff;
   padding: 10px;
   list-style-type: none;
   margin-bottom: 20px;
   box-shadow: 5px 5px #573eff;
+  font-size: 15px;
 }
 
 .title {
@@ -13,7 +14,6 @@
 
 .snippet {
   margin-top: 5px;
-  font-size: 12px;
 }
 
 @media only screen and (max-width: 800px) {

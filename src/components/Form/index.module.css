@@ -7,7 +7,6 @@
 
 .textInput {
   width: 80%;
-  height: 80%;
   outline: none;
   border: 2px solid #573eff;
   padding-left: 10px;
@@ -16,7 +15,6 @@
 
 .submitButton {
   width: 15%;
-  height: 92%;
   background: #573eff;
   border: none;
   display: flex;
