@@ -16,6 +16,10 @@
   margin-top: 5px;
 }
 
+.snippetDark {
+  color: hsla(0, 0%, 100%, 0.88);
+}
+
 @media only screen and (max-width: 800px) {
   .item {
     width: 85%;

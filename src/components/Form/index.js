@@ -66,7 +66,9 @@ const Form = props => {
         onChange={() => {
           props.setValueState(textInput.value);
         }}
-        className={styles.textInput}
+        className={
+          props.darkTheme ? [styles.textInput, styles.textInputDark].join(' ') : styles.textInput
+        }
       />
       <button className={styles.submitButton} type="submit">
         <img className={styles.searchIcon} src={search} alt="" />
@@ -78,7 +80,8 @@ const Form = props => {
 Form.propTypes = {
   value: PropTypes.string.isRequired,
   setDataState: PropTypes.func.isRequired,
-  setValueState: PropTypes.func.isRequired
+  setValueState: PropTypes.func.isRequired,
+  darkTheme: PropTypes.bool.isRequired
 };
 
 export default Form;

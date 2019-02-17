@@ -13,6 +13,19 @@
   color: #251a6b;
 }
 
+.textInput {
+  background: transparent;
+  width: 80%;
+  outline: none;
+  border: 2px solid #573eff;
+  padding-left: 10px;
+  color: #251a6b;
+}
+
+.textInputDark {
+  color: hsla(0, 0%, 100%, 0.88);
+}
+
 .submitButton {
   width: 15%;
   background: #573eff;

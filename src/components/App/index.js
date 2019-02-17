@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from './index.module.css';
 import Form from '../Form';
 import Item from '../Item';
+import Toggle from '../Toggle';
 
 // xhr.open(
 //   'GET',
@@ -25,7 +26,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { data: [], value: '' };
+    this.state = { data: [], value: '', darkTheme: false };
   }
 
   setDataState = data => {
@@ -36,14 +37,27 @@ class App extends Component {
     this.setState({ value: value });
   };
 
+  switchTheme = () => {
+    this.setState({ darkTheme: !this.state.darkTheme });
+  };
+
+  changeBodyBackground = () => {
+    this.state.darkTheme
+      ? (document.body.style.background = '#05263f')
+      : (document.body.style.background = 'white');
+  };
+
   render() {
+    this.changeBodyBackground();
     return (
       <div className={styles.app}>
+        <Toggle switchTheme={this.switchTheme} />
         <div className={styles.logo}>wiki search</div>
         <Form
           setDataState={this.setDataState}
           setValueState={this.setValueState}
           value={this.state.value}
+          darkTheme={this.state.darkTheme}
         />
         <ul className={styles.items}>
           {this.state.data.map((element, index) => {
@@ -53,6 +67,7 @@ class App extends Component {
                 snippet={element.snippet}
                 link={element.link}
                 key={index}
+                darkTheme={this.state.darkTheme}
               />
             );
           })}
