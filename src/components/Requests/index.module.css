@@ -1,0 +1,33 @@
+.requests {
+  width: 39%;
+  display: flex;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.request {
+  padding: 8px 15px;
+  font-size: 14px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  color: #573eff;
+  border: 1px solid #573eff;
+}
+
+.request:hover {
+  transition: all 0.2s ease;
+  color: white;
+  background: #573eff;
+  border: 1px solid #573eff;
+}
+
+@media only screen and (max-width: 800px) {
+  .requests {
+    width: 90%;
+  }
+  .request {
+    padding: 4px 7px;
+    font-size: 12px;
+  }
+}
