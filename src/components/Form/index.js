@@ -39,43 +39,64 @@ const ajaxGetRequest = (title, callback) => {
   };
 };
 
-const Form = props => {
-  let textInput;
-  return (
-    <form
-      className={styles.submitForm}
-      onSubmit={e => {
-        ajaxGetRequest(textInput.value, data => {
-          props.setDataState(data);
-        });
+class Form extends React.Component {
+  shouldComponentUpdate(props) {
+    this.textInput.value = props.value;
+    if (
+      navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i) != null
+    ) {
+      return true;
+    } else {
+    }
+    this.textInput.focus();
 
-        props.addRequest(textInput.value);
-        textInput.value = '';
+    return true;
+  }
 
-        e.preventDefault();
-      }}
-    >
-      <input
-        required
-        type="text"
-        ref={ref => {
-          textInput = ref;
+  render() {
+    return (
+      <form
+        className={styles.submitForm}
+        onSubmit={e => {
+          if (this.textInput.value === this.props.requests[0]) {
+            e.preventDefault();
+            return;
+          }
+          ajaxGetRequest(this.textInput.value, data => {
+            this.props.setDataState(data);
+          });
+          this.props.addRequest(this.textInput.value);
+          this.props.setValueState(this.textInput.value);
+          e.preventDefault();
         }}
-        className={
-          props.darkTheme ? [styles.textInput, styles.textInputDark].join(' ') : styles.textInput
-        }
-      />
-      <button className={styles.submitButton} type="submit">
-        <img className={styles.searchIcon} src={search} alt="" />
-      </button>
-    </form>
-  );
-};
+      >
+        <input
+          required
+          type="text"
+          ref={ref => {
+            this.textInput = ref;
+          }}
+          className={
+            this.props.darkTheme
+              ? [styles.textInput, styles.textInputDark].join(' ')
+              : styles.textInput
+          }
+        />
+        <button className={styles.submitButton} type="submit">
+          <img className={styles.searchIcon} src={search} alt="" />
+        </button>
+      </form>
+    );
+  }
+}
 
 Form.propTypes = {
   setDataState: PropTypes.func.isRequired,
   darkTheme: PropTypes.bool.isRequired,
-  addRequest: PropTypes.func.isRequired
+  addRequest: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  setValueState: PropTypes.func.isRequired,
+  requests: PropTypes.array.isRequired
 };
 
 export default Form;

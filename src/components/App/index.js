@@ -5,33 +5,19 @@ import Item from '../Item';
 import Toggle from '../Toggle';
 import Requests from '../Requests';
 
-// xhr.open(
-//   'GET',
-//   'https://en.wikipedia.org/w/api.php?action=parse&page=Putin&origin=*&format=json&prop=wikitext',
-//   true
-// );
-
-// xhr.open(
-//   'GET',
-//   'https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&titles=Putin&origin=*&format=json',
-//   true
-// );
-
-// xhr.open(
-//   'GET',
-//   'https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&titles=Rainbow&origin=*&format=json',
-//   true
-// );
-
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { data: [], requests: [], darkTheme: false };
+    this.state = { data: [], requests: [], darkTheme: false, value: '' };
   }
 
   setDataState = data => {
     this.setState({ data: data });
+  };
+
+  setValueState = value => {
+    this.setState({ value: value });
   };
 
   switchTheme = () => {
@@ -47,9 +33,7 @@ class App extends Component {
   getRequestsStringPreview = request => {
     let requests = this.state.requests;
     let requestsString = '';
-    requests.map(element => {
-      requestsString += element;
-    });
+    requests.map(element => (requestsString += element));
     let requestsStringPreview = requestsString + request;
     return requestsStringPreview;
   };
@@ -83,8 +67,11 @@ class App extends Component {
           setDataState={this.setDataState}
           darkTheme={this.state.darkTheme}
           addRequest={this.addRequest}
+          value={this.state.value}
+          setValueState={this.setValueState}
+          requests={this.state.requests}
         />
-        <Requests requests={this.state.requests} />
+        <Requests requests={this.state.requests} setValueState={this.setValueState} />
         <ul className={styles.items}>
           {this.state.data.map((element, index) => {
             return (
