@@ -5,12 +5,13 @@ import Item from '../Item';
 import Toggle from '../Toggle';
 import Requests from '../Requests';
 import AjaxError from '../AjaxError';
+import NoDataFound from '../NoDataFound';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { data: [], requests: [], darkTheme: false, value: '', ajaxError: false };
+    this.state = { requests: [], darkTheme: false, value: '', ajaxError: false };
   }
 
   setDataState = data => {
@@ -62,6 +63,28 @@ class App extends Component {
     this.setState({ ajaxError: bool });
   };
 
+  wikiResults = () => {
+    if (this.state.data && this.state.data.length === 0) {
+      return <NoDataFound />;
+    } else if (this.state.data && this.state.data.length !== 0) {
+      return (
+        <ul className={styles.items}>
+          {this.state.data.map((element, index) => {
+            return (
+              <Item
+                title={element.title}
+                snippet={element.snippet}
+                link={element.link}
+                key={index}
+                darkTheme={this.state.darkTheme}
+              />
+            );
+          })}
+        </ul>
+      );
+    }
+  };
+
   render() {
     this.changeBodyBackground();
     return (
@@ -78,23 +101,7 @@ class App extends Component {
           ajaxErrorState={this.ajaxErrorState}
         />
         <Requests requests={this.state.requests} setValueState={this.setValueState} />
-        {this.state.ajaxError ? (
-          <AjaxError />
-        ) : (
-          <ul className={styles.items}>
-            {this.state.data.map((element, index) => {
-              return (
-                <Item
-                  title={element.title}
-                  snippet={element.snippet}
-                  link={element.link}
-                  key={index}
-                  darkTheme={this.state.darkTheme}
-                />
-              );
-            })}
-          </ul>
-        )}
+        {this.state.ajaxError ? <AjaxError /> : this.wikiResults()}
       </div>
     );
   }
