@@ -4,12 +4,13 @@ import Form from '../Form';
 import Item from '../Item';
 import Toggle from '../Toggle';
 import Requests from '../Requests';
+import AjaxError from '../AjaxError';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { data: [], requests: [], darkTheme: false, value: '' };
+    this.state = { data: [], requests: [], darkTheme: false, value: '', ajaxError: false };
   }
 
   setDataState = data => {
@@ -57,6 +58,10 @@ class App extends Component {
     this.setState({ requests: requests });
   };
 
+  ajaxErrorState = bool => {
+    this.setState({ ajaxError: bool });
+  };
+
   render() {
     this.changeBodyBackground();
     return (
@@ -70,21 +75,26 @@ class App extends Component {
           value={this.state.value}
           setValueState={this.setValueState}
           requests={this.state.requests}
+          ajaxErrorState={this.ajaxErrorState}
         />
         <Requests requests={this.state.requests} setValueState={this.setValueState} />
-        <ul className={styles.items}>
-          {this.state.data.map((element, index) => {
-            return (
-              <Item
-                title={element.title}
-                snippet={element.snippet}
-                link={element.link}
-                key={index}
-                darkTheme={this.state.darkTheme}
-              />
-            );
-          })}
-        </ul>
+        {this.state.ajaxError ? (
+          <AjaxError />
+        ) : (
+          <ul className={styles.items}>
+            {this.state.data.map((element, index) => {
+              return (
+                <Item
+                  title={element.title}
+                  snippet={element.snippet}
+                  link={element.link}
+                  key={index}
+                  darkTheme={this.state.darkTheme}
+                />
+              );
+            })}
+          </ul>
+        )}
       </div>
     );
   }

@@ -4,39 +4,32 @@ import search from '../../img/search.svg';
 import PropTypes from 'prop-types';
 
 // Ajax get request function
-const ajaxGetRequest = (title, callback) => {
-  let xhr = new XMLHttpRequest();
+const ajaxGetRequest = title => {
+  return new Promise((resolve, reject) => {
+    let xhr = new XMLHttpRequest();
 
-  xhr.open(
-    'GET',
-    `https://en.wikipedia.org/w/api.php?action=opensearch&search=${title}&origin=*&format=json`,
-    true
-  );
+    xhr.open(
+      'GET',
+      `https://en.wikipedia.org/w/api.php?action=opensearch&search=${title}&origin=*&format=json`,
+      true
+    );
 
-  xhr.send();
+    xhr.onload = function() {
+      if (this.status == 200) {
+        resolve(JSON.parse(this.responseText));
+      } else {
+        let error = new Error(this.statusText);
+        error.code = this.status;
+        reject(error);
+      }
+    };
 
-  xhr.onreadystatechange = function() {
-    if (this.readyState !== 4) return;
-    if (this.status !== 200) {
-      console.log('Ошибка');
-      return;
-    }
+    xhr.onerror = function() {
+      reject(new Error('Network error'));
+    };
 
-    // Transformating wiki data into comfortable array
-    const data = JSON.parse(this.responseText);
-    const finalArray = [];
-    for (let index = 0; index < data[1].length; index++) {
-      const obj = {
-        title: data[1][index],
-        snippet: data[2][index],
-        link: data[3][index]
-      };
-      finalArray.push(obj);
-    }
-
-    // And then setting state via callback
-    callback(finalArray);
-  };
+    xhr.send();
+  });
 };
 
 class Form extends React.Component {
@@ -62,10 +55,28 @@ class Form extends React.Component {
             e.preventDefault();
             return;
           }
-          ajaxGetRequest(this.textInput.value, data => {
-            this.props.setDataState(data);
-            this.props.addRequest(this.textInput.value);
-          });
+          ajaxGetRequest(this.textInput.value)
+            .then(data => {
+              // Transformating wiki data into comfortable array
+              const finalArray = [];
+              for (let index = 0; index < data[1].length; index++) {
+                const obj = {
+                  title: data[1][index],
+                  snippet: data[2][index],
+                  link: data[3][index]
+                };
+                finalArray.push(obj);
+              }
+              return finalArray;
+            })
+            .then(data => {
+              this.props.setDataState(data);
+              this.props.addRequest(this.textInput.value);
+              this.props.ajaxErrorState(false);
+            })
+            .catch(() => {
+              this.props.ajaxErrorState(true);
+            });
           this.props.setValueState(this.textInput.value);
           e.preventDefault();
         }}
@@ -96,7 +107,8 @@ Form.propTypes = {
   addRequest: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
   setValueState: PropTypes.func.isRequired,
-  requests: PropTypes.array.isRequired
+  requests: PropTypes.array.isRequired,
+  ajaxErrorState: PropTypes.func.isRequired
 };
 
 export default Form;
