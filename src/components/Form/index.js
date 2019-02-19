@@ -64,8 +64,8 @@ class Form extends React.Component {
           }
           ajaxGetRequest(this.textInput.value, data => {
             this.props.setDataState(data);
+            this.props.addRequest(this.textInput.value);
           });
-          this.props.addRequest(this.textInput.value);
           this.props.setValueState(this.textInput.value);
           e.preventDefault();
         }}
