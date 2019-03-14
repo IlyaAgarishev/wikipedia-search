@@ -1,42 +1,16 @@
-import React from 'react';
-import styles from './index.module.css';
-import search from '../../img/search.svg';
-import PropTypes from 'prop-types';
-
-// Ajax get request function
-const ajaxGetRequest = title => {
-  return new Promise((resolve, reject) => {
-    let xhr = new XMLHttpRequest();
-
-    xhr.open(
-      'GET',
-      `https://en.wikipedia.org/w/api.php?action=opensearch&search=${title}&origin=*&format=json`,
-      true
-    );
-
-    xhr.onload = function() {
-      if (this.status == 200) {
-        resolve(JSON.parse(this.responseText));
-      } else {
-        let error = new Error(this.statusText);
-        error.code = this.status;
-        reject(error);
-      }
-    };
-
-    xhr.onerror = function() {
-      reject(new Error('Network error'));
-    };
-
-    xhr.send();
-  });
-};
+import React from "react";
+import styles from "./index.module.css";
+import search from "../../img/search.svg";
+import PropTypes from "prop-types";
+import { ajaxGetRequest, addRequest } from "../../requestFunctions";
 
 class Form extends React.Component {
   shouldComponentUpdate(props) {
     this.textInput.value = props.value;
     if (
-      navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i) != null
+      navigator.userAgent.match(
+        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i
+      ) != null
     ) {
       return true;
     } else {
@@ -71,7 +45,11 @@ class Form extends React.Component {
             })
             .then(data => {
               this.props.setDataState(data);
-              this.props.addRequest(this.textInput.value);
+              addRequest(
+                this.textInput.value,
+                this.props.requests,
+                this.props.setRequests
+              );
               this.props.ajaxErrorState(false);
             })
             .catch(() => {
@@ -89,7 +67,7 @@ class Form extends React.Component {
           }}
           className={
             this.props.darkTheme
-              ? [styles.textInput, styles.textInputDark].join(' ')
+              ? [styles.textInput, styles.textInputDark].join(" ")
               : styles.textInput
           }
         />
