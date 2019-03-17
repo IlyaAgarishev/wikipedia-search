@@ -7,6 +7,7 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.0",
     "enzyme-to-json": "^3.3.5",
+    "random-words": "^1.1.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-scripts": "2.1.5",
@@ -22,7 +23,9 @@
     "extends": "react-app"
   },
   "jest": {
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   },
   "browserslist": [
     ">0.2%",

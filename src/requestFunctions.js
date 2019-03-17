@@ -1,5 +1,5 @@
 // Transformating wiki data into comfortable array
-const beautifyResponseText = data => {
+export const beautifyResponseText = data => {
   const finalArray = [];
   for (let index = 0; index < data[1].length; index++) {
     const obj = {
@@ -40,7 +40,7 @@ export const ajaxGetRequest = title => {
   });
 };
 
-const getRequestsStringPreview = (request, requests) => {
+export const getRequestsStringPreview = (request, requests) => {
   return requests.join("") + request;
 };
 
