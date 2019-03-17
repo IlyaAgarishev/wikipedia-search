@@ -31,19 +31,6 @@ class Form extends React.Component {
           }
           ajaxGetRequest(this.textInput.value)
             .then(data => {
-              // Transformating wiki data into comfortable array
-              const finalArray = [];
-              for (let index = 0; index < data[1].length; index++) {
-                const obj = {
-                  title: data[1][index],
-                  snippet: data[2][index],
-                  link: data[3][index]
-                };
-                finalArray.push(obj);
-              }
-              return finalArray;
-            })
-            .then(data => {
               this.props.setDataState(data);
               addRequest(
                 this.textInput.value,
@@ -82,7 +69,6 @@ class Form extends React.Component {
 Form.propTypes = {
   setDataState: PropTypes.func.isRequired,
   darkTheme: PropTypes.bool.isRequired,
-  addRequest: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
   setValueState: PropTypes.func.isRequired,
   requests: PropTypes.array.isRequired,

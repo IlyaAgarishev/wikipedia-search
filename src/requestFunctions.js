@@ -1,6 +1,17 @@
-import React from "react";
+// Transformating wiki data into comfortable array
+const beautifyResponseText = data => {
+  const finalArray = [];
+  for (let index = 0; index < data[1].length; index++) {
+    const obj = {
+      title: data[1][index],
+      snippet: data[2][index],
+      link: data[3][index]
+    };
+    finalArray.push(obj);
+  }
+  return finalArray;
+};
 
-// Ajax get request function
 export const ajaxGetRequest = title => {
   return new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest();
@@ -13,7 +24,7 @@ export const ajaxGetRequest = title => {
 
     xhr.onload = function() {
       if (this.status === 200) {
-        resolve(JSON.parse(this.responseText));
+        resolve(beautifyResponseText(JSON.parse(this.responseText)));
       } else {
         let error = new Error(this.statusText);
         error.code = this.status;
@@ -30,15 +41,12 @@ export const ajaxGetRequest = title => {
 };
 
 const getRequestsStringPreview = (request, requests) => {
-  let requestsString = "";
-  requests.map(element => (requestsString += element));
-  let requestsStringPreview = requestsString + request;
-  return requestsStringPreview;
+  return requests.join("") + request;
 };
 
 export const addRequest = (request, requests, callback) => {
-  if (request.length > 30) {
-    request = request.slice(0, 30);
+  if (request.length > 27) {
+    request = request.slice(0, 27) + "...";
   }
 
   let requestsStringPreview = getRequestsStringPreview(request, requests);
