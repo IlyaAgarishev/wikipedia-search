@@ -36,15 +36,13 @@ const App = () => {
     }
   };
 
-  const changeBodyBackground = () => {
-    darkTheme
-      ? (document.body.style.background = "#05263f")
-      : (document.body.style.background = "white");
-  };
+  darkTheme
+    ? (document.body.style.background = "#05263f")
+    : (document.body.style.background = "white");
 
   return (
     <div className={styles.app}>
-      <Toggle switchTheme={setDarkTheme} />
+      <Toggle switchTheme={setDarkTheme} darkTheme={darkTheme} />
       <div className={styles.logo}>wiki search</div>
       <Form
         setDataState={setData}

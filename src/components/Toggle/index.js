@@ -4,9 +4,15 @@ import PropTypes from "prop-types";
 import Toggle from "react-toggle";
 import "./toggle.css";
 
-const ToggleTheme = ({ switchTheme }) => (
+const ToggleTheme = ({ switchTheme, darkTheme }) => (
   <label className={styles.toggleTheme}>
-    <Toggle defaultChecked={false} icons={false} onChange={switchTheme} />
+    <Toggle
+      defaultChecked={false}
+      icons={false}
+      onChange={() => {
+        switchTheme(!darkTheme);
+      }}
+    />
   </label>
 );
 
