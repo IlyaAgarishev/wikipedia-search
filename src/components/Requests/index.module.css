@@ -1,5 +1,5 @@
 .requests {
-  width: 39%;
+  width: 100%;
   display: flex;
   margin-top: 10px;
   flex-wrap: wrap;
@@ -20,14 +20,4 @@
   color: white;
   background: #573eff;
   border: 1px solid #573eff;
-}
-
-@media only screen and (max-width: 800px) {
-  .requests {
-    width: 90%;
-  }
-  .request {
-    padding: 4px 7px;
-    font-size: 12px;
-  }
 }

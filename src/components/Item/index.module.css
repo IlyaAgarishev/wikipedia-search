@@ -1,27 +1,22 @@
 .item {
-  width: 39%;
+  width: 100%;
   border: 1px solid #573eff;
-  padding: 10px;
   list-style-type: none;
   margin-bottom: 20px;
   box-shadow: 5px 5px #573eff;
   font-size: 18px;
+  padding-top: 10px;
 }
 
 .title {
   color: #573eff;
+  margin: 0px 10px;
 }
 
 .snippet {
-  margin-top: 5px;
+  margin: 10px;
 }
 
 .snippetDark {
   color: hsla(0, 0%, 100%, 0.88);
-}
-
-@media only screen and (max-width: 800px) {
-  .item {
-    width: 85%;
-  }
 }

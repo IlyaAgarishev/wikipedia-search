@@ -32,8 +32,7 @@ const Item = props => {
 Item.propTypes = {
   title: PropTypes.string.isRequired,
   snippet: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
-  darkTheme: PropTypes.bool.isRequired
+  link: PropTypes.string.isRequired
 };
 
 export default Item;

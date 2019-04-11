@@ -64,7 +64,6 @@ const Form = props => {
 
 Form.propTypes = {
   setData: PropTypes.func.isRequired,
-  darkTheme: PropTypes.bool.isRequired,
   value: PropTypes.string.isRequired,
   setValue: PropTypes.func.isRequired,
   requests: PropTypes.array.isRequired,

@@ -1,12 +1,12 @@
 .submitForm {
   margin-top: 50px;
   display: flex;
-  width: 40%;
+  width: 100%;
   height: 50px;
 }
 
 .textInput {
-  width: 80%;
+  width: 100%;
   background: transparent;
   outline: none;
   border: 2px solid #573eff;
@@ -32,10 +32,4 @@
 
 .searchIcon {
   width: 15px;
-}
-
-@media only screen and (max-width: 800px) {
-  .submitForm {
-    width: 90%;
-  }
 }
