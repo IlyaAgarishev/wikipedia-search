@@ -6,6 +6,7 @@ import Toggle from "../Toggle";
 import Requests from "../Requests";
 import AjaxError from "../AjaxError";
 import NoDataFound from "../NoDataFound";
+import { MyContext } from "../../context";
 
 const App = () => {
   const [requests, setRequests] = useState([]);
@@ -27,7 +28,6 @@ const App = () => {
                 snippet={element.snippet}
                 link={element.link}
                 key={index}
-                darkTheme={darkTheme}
               />
             );
           })}
@@ -41,21 +41,22 @@ const App = () => {
     : (document.body.style.background = "white");
 
   return (
-    <div className={styles.app}>
-      <Toggle setDarkTheme={setDarkTheme} darkTheme={darkTheme} />
-      <div className={styles.logo}>wiki search</div>
-      <Form
-        setData={setData}
-        darkTheme={darkTheme}
-        value={value}
-        setValue={setValue}
-        requests={requests}
-        setAjaxError={setAjaxError}
-        setRequests={setRequests}
-      />
-      <Requests requests={requests} setValue={setValue} />
-      {ajaxError ? <AjaxError /> : wikiResults()}
-    </div>
+    <MyContext.Provider value={darkTheme}>
+      <div className={styles.app}>
+        <Toggle setDarkTheme={setDarkTheme} />
+        <div className={styles.logo}>wiki search</div>
+        <Form
+          setData={setData}
+          value={value}
+          setValue={setValue}
+          requests={requests}
+          setAjaxError={setAjaxError}
+          setRequests={setRequests}
+        />
+        <Requests requests={requests} setValue={setValue} />
+        {ajaxError ? <AjaxError /> : wikiResults()}
+      </div>
+    </MyContext.Provider>
   );
 };
 

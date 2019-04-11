@@ -1,19 +1,15 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import styles from "./index.module.css";
 import search from "../../img/search.svg";
 import PropTypes from "prop-types";
 import { ajaxGetRequest, addRequest } from "../../requestFunctions";
+import { MyContext } from "../../context";
 
 const Form = props => {
-  const {
-    setData,
-    darkTheme,
-    value,
-    setValue,
-    requests,
-    setAjaxError,
-    setRequests
-  } = { ...props };
+  const { setData, value, setValue, requests, setAjaxError, setRequests } = {
+    ...props
+  };
+  const darkTheme = useContext(MyContext);
   const textInput = useRef(null);
 
   useEffect(() => {
