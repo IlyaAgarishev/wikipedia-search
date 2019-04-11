@@ -59,5 +59,5 @@ export const addRequest = (request, requests, callback) => {
   } else {
     requests.unshift(request);
   }
-  callback(requests);
+  callback([...requests]);
 };

@@ -96,7 +96,7 @@ exports[`Toggle snapshot 1`] = `
     <Toggle
       defaultChecked={false}
       icons={false}
-      onChange={[MockFunction]}
+      onChange={[Function]}
     >
       <div
         className="react-toggle"
@@ -122,7 +122,7 @@ exports[`Toggle snapshot 1`] = `
           className="react-toggle-screenreader-only"
           defaultChecked={false}
           onBlur={[Function]}
-          onChange={[MockFunction]}
+          onChange={[Function]}
           onFocus={[Function]}
           type="checkbox"
         />
@@ -137,6 +137,7 @@ exports[`shallow App snapshot 1`] = `
   className="app"
 >
   <ToggleTheme
+    darkTheme={false}
     switchTheme={[Function]}
   />
   <div

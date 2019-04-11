@@ -1,70 +1,70 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styles from "./index.module.css";
 import search from "../../img/search.svg";
 import PropTypes from "prop-types";
 import { ajaxGetRequest, addRequest } from "../../requestFunctions";
 
-class Form extends React.Component {
-  shouldComponentUpdate(props) {
-    this.textInput.value = props.value;
+const Form = props => {
+  const {
+    setDataState,
+    darkTheme,
+    value,
+    setValueState,
+    requests,
+    ajaxErrorState,
+    setRequests
+  } = { ...props };
+  const textInput = useRef(null);
+
+  useEffect(() => {
+    textInput.current.value = value;
     if (
       navigator.userAgent.match(
         /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i
       ) != null
     ) {
-      return true;
-    } else {
+      return;
     }
-    this.textInput.focus();
+    textInput.current.focus();
+  }, [value]);
 
-    return true;
-  }
-
-  render() {
-    return (
-      <form
-        className={styles.submitForm}
-        onSubmit={e => {
-          if (this.textInput.value === this.props.requests[0]) {
-            e.preventDefault();
-            return;
-          }
-          ajaxGetRequest(this.textInput.value)
-            .then(data => {
-              this.props.setDataState(data);
-              addRequest(
-                this.textInput.value,
-                this.props.requests,
-                this.props.setRequests
-              );
-              this.props.ajaxErrorState(false);
-            })
-            .catch(() => {
-              this.props.ajaxErrorState(true);
-            });
-          this.props.setValueState(this.textInput.value);
+  return (
+    <form
+      className={styles.submitForm}
+      onSubmit={e => {
+        if (textInput.current.value === requests[0]) {
           e.preventDefault();
-        }}
-      >
-        <input
-          required
-          type="text"
-          ref={ref => {
-            this.textInput = ref;
-          }}
-          className={
-            this.props.darkTheme
-              ? [styles.textInput, styles.textInputDark].join(" ")
-              : styles.textInput
-          }
-        />
-        <button className={styles.submitButton} type="submit">
-          <img className={styles.searchIcon} src={search} alt="" />
-        </button>
-      </form>
-    );
-  }
-}
+          return;
+        }
+        ajaxGetRequest(textInput.current.value)
+          .then(data => {
+            setDataState(data);
+            addRequest(textInput.current.value, requests, setRequests);
+            ajaxErrorState(false);
+          })
+          .catch(() => {
+            ajaxErrorState(true);
+          });
+        setValueState(textInput.current.value);
+        e.preventDefault();
+      }}
+    >
+      <input
+        required
+        type="text"
+        ref={textInput}
+        className={
+          darkTheme
+            ? [styles.textInput, styles.textInputDark].join(" ")
+            : styles.textInput
+        }
+      />
+      <button className={styles.submitButton} type="submit">
+        <img className={styles.searchIcon} src={search} alt="" />
+      </button>
+    </form>
+  );
+};
 
 Form.propTypes = {
   setDataState: PropTypes.func.isRequired,
