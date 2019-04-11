@@ -4,6 +4,7 @@ import App from "../components/App";
 import Item from "../components/Item";
 import Toggle from "../components/Toggle";
 import Form from "../components/Form";
+import Requests from "../components/Requests";
 import randomWords from "random-words";
 import {
   beautifyResponseText,
@@ -59,55 +60,59 @@ test("addRequest returns array and sum of lengths array elements <= 60 ", () => 
 
 // Components testing
 
-test("shallow App snapshot", () => {
-  const component = shallow(<App />);
-  expect(component).toMatchSnapshot();
-});
-
-test("Item snapshot darkFalse", () => {
-  const component = shallow(
-    <Item title="title" snippet="snippet" link="link" darkTheme={false} />
+test("Item renders props correctly", () => {
+  const props = {
+    title: "title",
+    snippet: "snippet",
+    link: "link"
+  };
+  const component = mount(
+    <Item title={props.title} snippet={props.snippet} link={props.link} />
   );
-  expect(component).toMatchSnapshot();
+  expect(component.find(".title").text()).toBe(props.title);
+  expect(component.find(".snippet").text()).toBe(props.snippet);
+  expect(component.find(".title").props()).toHaveProperty("href", props.link);
 });
 
-test("Item snapshot darkTrue", () => {
-  const component = shallow(
-    <Item title="title" snippet="snippet" link="link" darkTheme={true} />
+test("Toggle renders props correctly", () => {
+  const func = jest.fn();
+  const component = mount(<Toggle setDarkTheme={func} />);
+  expect(component.props()).toHaveProperty("setDarkTheme", func);
+});
+
+test("Form renders props correctly", () => {
+  const func = jest.fn();
+  const props = {
+    setData: func,
+    value: "value",
+    setValue: func,
+    requests: ["wow", "how"],
+    setAjaxError: func,
+    setRequests: func
+  };
+  const component = mount(<Form {...props} />);
+  expect(component.props()).toHaveProperty("setData", props.setData);
+  expect(component.props()).toHaveProperty("value", props.value);
+  expect(component.props()).toHaveProperty("setValue", props.setValue);
+  expect(component.props()).toHaveProperty("requests", props.requests);
+  expect(component.props()).toHaveProperty("setAjaxError", props.setAjaxError);
+  expect(component.props()).toHaveProperty("setRequests", props.setRequests);
+});
+
+test("Requests renders props correctly", () => {
+  const func = jest.fn();
+  const props = {
+    requests: ["wow", "how"],
+    setValue: func
+  };
+  const component = mount(
+    <Requests requests={props.requests} setValue={props.setValue} />
   );
-  expect(component).toMatchSnapshot();
+  expect(component.props()).toHaveProperty("requests", props.requests);
+  expect(component.props()).toHaveProperty("setValue", props.setValue);
 });
 
-test("Toggle snapshot", () => {
-  const component = mount(<Toggle switchTheme={jest.fn()} />);
-  expect(component).toMatchSnapshot();
-  component.unmount();
-});
-
-test("Form snapshot darkFalse", () => {
-  const component = shallow(
-    <Form
-      setDataState={jest.fn()}
-      darkTheme={false}
-      value="value"
-      setValueState={jest.fn()}
-      requests={["one", "two"]}
-      ajaxErrorState={jest.fn()}
-    />
-  );
-  expect(component).toMatchSnapshot();
-});
-
-test("Form snapshot darkTrue", () => {
-  const component = shallow(
-    <Form
-      setDataState={jest.fn()}
-      darkTheme={true}
-      value="value"
-      setValueState={jest.fn()}
-      requests={["one", "two"]}
-      ajaxErrorState={jest.fn()}
-    />
-  );
-  expect(component).toMatchSnapshot();
-});
+// test("shallow App snapshot", () => {
+//   const component = shallow(<App />);
+//   expect(component).toMatchSnapshot();
+// });
