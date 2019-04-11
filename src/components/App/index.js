@@ -42,18 +42,18 @@ const App = () => {
 
   return (
     <div className={styles.app}>
-      <Toggle switchTheme={setDarkTheme} darkTheme={darkTheme} />
+      <Toggle setDarkTheme={setDarkTheme} darkTheme={darkTheme} />
       <div className={styles.logo}>wiki search</div>
       <Form
-        setDataState={setData}
+        setData={setData}
         darkTheme={darkTheme}
         value={value}
-        setValueState={setValue}
+        setValue={setValue}
         requests={requests}
-        ajaxErrorState={setAjaxError}
+        setAjaxError={setAjaxError}
         setRequests={setRequests}
       />
-      <Requests requests={requests} setValueState={setValue} />
+      <Requests requests={requests} setValue={setValue} />
       {ajaxError ? <AjaxError /> : wikiResults()}
     </div>
   );

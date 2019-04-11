@@ -6,12 +6,12 @@ import { ajaxGetRequest, addRequest } from "../../requestFunctions";
 
 const Form = props => {
   const {
-    setDataState,
+    setData,
     darkTheme,
     value,
-    setValueState,
+    setValue,
     requests,
-    ajaxErrorState,
+    setAjaxError,
     setRequests
   } = { ...props };
   const textInput = useRef(null);
@@ -32,21 +32,21 @@ const Form = props => {
     <form
       className={styles.submitForm}
       onSubmit={e => {
+        e.preventDefault();
         if (textInput.current.value === requests[0]) {
           e.preventDefault();
           return;
         }
         ajaxGetRequest(textInput.current.value)
           .then(data => {
-            setDataState(data);
+            setData(data);
             addRequest(textInput.current.value, requests, setRequests);
-            ajaxErrorState(false);
+            setAjaxError(false);
           })
           .catch(() => {
-            ajaxErrorState(true);
+            setAjaxError(true);
           });
-        setValueState(textInput.current.value);
-        e.preventDefault();
+        setValue(textInput.current.value);
       }}
     >
       <input
@@ -67,12 +67,12 @@ const Form = props => {
 };
 
 Form.propTypes = {
-  setDataState: PropTypes.func.isRequired,
+  setData: PropTypes.func.isRequired,
   darkTheme: PropTypes.bool.isRequired,
   value: PropTypes.string.isRequired,
-  setValueState: PropTypes.func.isRequired,
+  setValue: PropTypes.func.isRequired,
   requests: PropTypes.array.isRequired,
-  ajaxErrorState: PropTypes.func.isRequired
+  setAjaxError: PropTypes.func.isRequired
 };
 
 export default Form;

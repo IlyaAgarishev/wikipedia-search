@@ -3,7 +3,7 @@ import styles from "./index.module.css";
 import PropTypes from "prop-types";
 
 const Requests = props => {
-  const { requests, setValueState } = { ...props };
+  const { requests, setValue } = { ...props };
   return (
     <div className={styles.requests}>
       {requests.map((element, index) => {
@@ -12,7 +12,7 @@ const Requests = props => {
             className={styles.request}
             key={index}
             onClick={() => {
-              setValueState(element);
+              setValue(element);
             }}
           >
             {element}
@@ -25,7 +25,7 @@ const Requests = props => {
 
 Requests.propTypes = {
   requests: PropTypes.array.isRequired,
-  setValueState: PropTypes.func.isRequired
+  setValue: PropTypes.func.isRequired
 };
 
 export default Requests;
