@@ -54,6 +54,7 @@ export const removeRepeatingRequest = (request, requests) => {
       }
     }
   });
+  return requests;
 };
 
 export const addRequest = (request, requests, callback) => {

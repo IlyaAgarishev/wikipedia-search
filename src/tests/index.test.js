@@ -10,6 +10,7 @@ import {
   beautifyResponseText,
   ajaxGetRequest,
   getRequestsStringPreview,
+  removeRepeatingRequest,
   addRequest
 } from "../requestFunctions.js";
 
@@ -39,10 +40,21 @@ test("Length of objects of ajax returned array equals 3 and items in every objec
   });
 });
 
-test("getRequestsStringPreview", () => {
+test("getRequestsStringPreview is a string and has correct length", () => {
   const request = "request";
   const requests = ["one", "two", "three"];
+  const compressedString = request + requests.join("");
   expect(typeof getRequestsStringPreview(request, requests)).toBe("string");
+  expect(getRequestsStringPreview(request, requests).length).toBe(
+    compressedString.length
+  );
+});
+
+test("removeRepeatingRequest returns right array", () => {
+  let request = "one";
+  let requests = ["one", "two", "one"];
+  expect(Array.isArray(removeRepeatingRequest(request, requests))).toBe(true);
+  expect(removeRepeatingRequest(request, requests)).toEqual(["one", "two"]);
 });
 
 test("addRequest returns array and sum of lengths array elements <= 60 ", () => {
@@ -91,12 +103,7 @@ test("Form renders props correctly", () => {
     setRequests: func
   };
   const component = mount(<Form {...props} />);
-  expect(component.props()).toHaveProperty("setData", props.setData);
-  expect(component.props()).toHaveProperty("value", props.value);
-  expect(component.props()).toHaveProperty("setValue", props.setValue);
-  expect(component.props()).toHaveProperty("requests", props.requests);
-  expect(component.props()).toHaveProperty("setAjaxError", props.setAjaxError);
-  expect(component.props()).toHaveProperty("setRequests", props.setRequests);
+  expect(component.props()).toEqual(props);
 });
 
 test("Requests renders props correctly", () => {
