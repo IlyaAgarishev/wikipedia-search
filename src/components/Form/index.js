@@ -36,7 +36,7 @@ const Form = props => {
         ajaxGetRequest(textInput.current.value)
           .then(data => {
             setData(data);
-            addRequest(textInput.current.value, requests, setRequests);
+            addRequest(textInput.current.value.trim(), requests, setRequests);
             setAjaxError(false);
           })
           .catch(() => {

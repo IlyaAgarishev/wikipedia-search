@@ -44,12 +44,25 @@ export const getRequestsStringPreview = (request, requests) => {
   return requests.join("") + request;
 };
 
+export const removeRepeatingRequest = (request, requests) => {
+  let conunter = 0;
+  requests.map((element, index) => {
+    if (element === request) {
+      conunter++;
+      if (conunter > 1) {
+        requests.splice(index, 1);
+      }
+    }
+  });
+};
+
 export const addRequest = (request, requests, callback) => {
   if (request.length > 27) {
     request = request.slice(0, 27) + "...";
   }
 
   let requestsStringPreview = getRequestsStringPreview(request, requests);
+
   if (requestsStringPreview.length > 60) {
     while (requestsStringPreview.length > 60) {
       requests.pop();
@@ -59,5 +72,6 @@ export const addRequest = (request, requests, callback) => {
   } else {
     requests.unshift(request);
   }
+  removeRepeatingRequest(request, requests);
   callback([...requests]);
 };
