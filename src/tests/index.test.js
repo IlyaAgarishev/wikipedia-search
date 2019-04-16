@@ -115,8 +115,7 @@ test("Requests renders props correctly", () => {
   const component = mount(
     <Requests requests={props.requests} setValue={props.setValue} />
   );
-  expect(component.props()).toHaveProperty("requests", props.requests);
-  expect(component.props()).toHaveProperty("setValue", props.setValue);
+  expect(component.props()).toEqual(props);
 });
 
 // test("shallow App snapshot", () => {
