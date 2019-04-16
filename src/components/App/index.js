@@ -12,7 +12,10 @@ const App = () => {
   const [requests, setRequests] = useState([]);
   const [darkTheme, setDarkTheme] = useState(false);
   const [value, setValue] = useState("");
-  const [ajaxError, setAjaxError] = useState(false);
+  const [ajaxError, setAjaxError] = useState({
+    error: "No error",
+    status: false
+  });
   const [data, setData] = useState();
 
   const wikiResults = () => {
@@ -39,7 +42,6 @@ const App = () => {
   darkTheme
     ? (document.body.style.background = "#05263f")
     : (document.body.style.background = "white");
-
   return (
     <MyContext.Provider value={darkTheme}>
       <div className={styles.app}>
@@ -54,7 +56,7 @@ const App = () => {
           setRequests={setRequests}
         />
         <Requests requests={requests} setValue={setValue} />
-        {ajaxError ? <AjaxError /> : wikiResults()}
+        {ajaxError.status ? <AjaxError ajaxError={ajaxError} /> : wikiResults()}
       </div>
     </MyContext.Provider>
   );

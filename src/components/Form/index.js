@@ -37,10 +37,10 @@ const Form = props => {
           .then(data => {
             setData(data);
             addRequest(textInput.current.value.trim(), requests, setRequests);
-            setAjaxError(false);
+            setAjaxError({ error: "No error", status: false });
           })
-          .catch(() => {
-            setAjaxError(true);
+          .catch(error => {
+            setAjaxError({ error: error, status: true });
           });
         setValue(textInput.current.value);
       }}
