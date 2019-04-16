@@ -1,20 +1,19 @@
 .item {
-  width: 100%;
+  width: 96%;
+  padding: 2%;
   border: 1px solid #573eff;
   list-style-type: none;
   margin-bottom: 20px;
   box-shadow: 5px 5px #573eff;
   font-size: 18px;
-  padding-top: 10px;
 }
 
 .title {
   color: #573eff;
-  margin: 0px 10px;
 }
 
 .snippet {
-  margin: 10px;
+  margin-top: 10px;
 }
 
 .snippetDark {

@@ -2,6 +2,7 @@ body {
   background: white;
   display: flex;
   justify-content: center;
+  padding: 20px;
 }
 .app {
   display: flex;
@@ -30,7 +31,6 @@ body {
 
 @media only screen and (max-width: 800px) {
   body {
-    padding: 20px;
     display: block;
   }
   .app {

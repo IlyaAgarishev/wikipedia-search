@@ -1,5 +1,5 @@
 import React from "react";
-import react, { useState } from "react";
+import { useState } from "react";
 import styles from "./index.module.css";
 
 const AjaxError = ({ ajaxError }) => {

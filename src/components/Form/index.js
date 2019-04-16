@@ -6,7 +6,15 @@ import { ajaxGetRequest, addRequest } from "../../requestFunctions";
 import { MyContext } from "../../context";
 
 const Form = props => {
-  const { setData, value, setValue, requests, setAjaxError, setRequests } = {
+  const {
+    setData,
+    value,
+    setValue,
+    requests,
+    setAjaxError,
+    setRequests,
+    setAjaxTime
+  } = {
     ...props
   };
   const darkTheme = useContext(MyContext);
@@ -33,11 +41,14 @@ const Form = props => {
           e.preventDefault();
           return;
         }
+        let timeBeforeAjax = new Date().getMilliseconds();
         ajaxGetRequest(textInput.current.value)
           .then(data => {
             setData(data);
             addRequest(textInput.current.value.trim(), requests, setRequests);
             setAjaxError({ error: "No error", status: false });
+            let timeAfterAjax = new Date().getMilliseconds();
+            setAjaxTime(timeAfterAjax - timeBeforeAjax);
           })
           .catch(error => {
             setAjaxError({ error: error, status: true });
@@ -67,7 +78,8 @@ Form.propTypes = {
   value: PropTypes.string.isRequired,
   setValue: PropTypes.func.isRequired,
   requests: PropTypes.array.isRequired,
-  setAjaxError: PropTypes.func.isRequired
+  setAjaxError: PropTypes.func.isRequired,
+  setAjaxTime: PropTypes.func.isRequired
 };
 
 export default Form;

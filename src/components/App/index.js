@@ -7,6 +7,7 @@ import Requests from "../Requests";
 import AjaxError from "../AjaxError";
 import NoDataFound from "../NoDataFound";
 import { MyContext } from "../../context";
+import AjaxTime from "../AjaxTime";
 
 const App = () => {
   const [requests, setRequests] = useState([]);
@@ -17,6 +18,7 @@ const App = () => {
     status: false
   });
   const [data, setData] = useState();
+  const [ajaxTime, setAjaxTime] = useState(0);
 
   const wikiResults = () => {
     if (data && data.length === 0) {
@@ -45,6 +47,7 @@ const App = () => {
   return (
     <MyContext.Provider value={darkTheme}>
       <div className={styles.app}>
+        <AjaxTime ajaxTime={ajaxTime} />
         <Toggle setDarkTheme={setDarkTheme} />
         <div className={styles.logo}>wiki search</div>
         <Form
@@ -54,6 +57,7 @@ const App = () => {
           requests={requests}
           setAjaxError={setAjaxError}
           setRequests={setRequests}
+          setAjaxTime={setAjaxTime}
         />
         <Requests requests={requests} setValue={setValue} />
         {ajaxError.status ? <AjaxError ajaxError={ajaxError} /> : wikiResults()}
