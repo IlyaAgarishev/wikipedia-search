@@ -4,7 +4,7 @@ Simple web app built with Wikipedia API. It helps to search top wiki pages and s
 
 See demo: https://wikipedia-search.surge.sh/
 
-![Imgur](https://i.imgur.com/bNZnjdm.png)
+![Imgur](https://i.imgur.com/Ixn8IZQ.png)
 
 ### Available commands:
 
