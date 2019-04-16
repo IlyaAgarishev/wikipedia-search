@@ -1,0 +1,184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Requests renders props correctly 1`] = `
+<Requests
+  requests={
+    Array [
+      "wow",
+      "how",
+    ]
+  }
+  setValue={[MockFunction]}
+>
+  <div
+    className="requests"
+  >
+    <div
+      className="request"
+      key="0"
+      onClick={[Function]}
+    >
+      wow
+    </div>
+    <div
+      className="request"
+      key="1"
+      onClick={[Function]}
+    >
+      how
+    </div>
+  </div>
+</Requests>
+`;
+
+exports[`snapshots 1`] = `
+<ContextProvider
+  value={false}
+>
+  <div
+    className="app"
+  >
+    <AjaxTime
+      ajaxTime={0}
+    />
+    <ToggleTheme
+      setDarkTheme={[Function]}
+    />
+    <div
+      className="logo"
+    >
+      wiki search
+    </div>
+    <Form
+      requests={Array []}
+      setAjaxError={[Function]}
+      setAjaxTime={[Function]}
+      setData={[Function]}
+      setRequests={[Function]}
+      setValue={[Function]}
+      value=""
+    />
+    <Requests
+      requests={Array []}
+      setValue={[Function]}
+    />
+  </div>
+</ContextProvider>
+`;
+
+exports[`snapshots 2`] = `
+<li
+  className="item"
+>
+  <a
+    className="title"
+    rel="noopener noreferrer"
+    target="_blank"
+  />
+  <div
+    className="snippet"
+  />
+</li>
+`;
+
+exports[`snapshots 3`] = `
+<label
+  className="toggleTheme"
+>
+  <Toggle
+    defaultChecked={false}
+    icons={false}
+    onChange={[Function]}
+  />
+</label>
+`;
+
+exports[`snapshots 4`] = `
+<form
+  className="submitForm"
+  onSubmit={[Function]}
+>
+  <input
+    className="textInput"
+    required={true}
+    type="text"
+  />
+  <button
+    className="submitButton"
+    type="submit"
+  >
+    <img
+      alt=""
+      className="searchIcon"
+      src="search.svg"
+    />
+  </button>
+</form>
+`;
+
+exports[`snapshots 5`] = `
+<div
+  className="requests"
+>
+  <div
+    className="request"
+    key="0"
+    onClick={[Function]}
+  >
+    wow
+  </div>
+  <div
+    className="request"
+    key="1"
+    onClick={[Function]}
+  >
+    how
+  </div>
+</div>
+`;
+
+exports[`snapshots 6`] = `
+<div
+  className="ajaxTime"
+>
+  <div
+    className="ajaxTimeText"
+  >
+    Time of request:
+  </div>
+  <div
+    className="ajaxTimeNumber"
+  >
+     ms
+  </div>
+</div>
+`;
+
+exports[`snapshots 7`] = `
+<div
+  className="ajaxError"
+>
+  <div
+    className="basicDescription"
+  >
+    <span
+      style={
+        Object {
+          "color": "red",
+        }
+      }
+    >
+      Error occurred.
+    </span>
+     Try to reload the page or check the internet connection :(
+  </div>
+  <div>
+    <div
+      className="moreInfo"
+      onClick={[Function]}
+    >
+      More Info
+    </div>
+  </div>
+</div>
+`;

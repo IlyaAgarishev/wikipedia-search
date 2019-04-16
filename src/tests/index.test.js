@@ -5,6 +5,7 @@ import Item from "../components/Item";
 import Toggle from "../components/Toggle";
 import Form from "../components/Form";
 import Requests from "../components/Requests";
+import AjaxTime from "../components/AjaxTime";
 import randomWords from "random-words";
 import {
   beautifyResponseText,
@@ -13,6 +14,7 @@ import {
   removeRepeatingRequest,
   addRequest
 } from "../requestFunctions.js";
+import AjaxError from "../components/AjaxError";
 
 // Functions testing
 
@@ -86,26 +88,6 @@ test("Item renders props correctly", () => {
   expect(component.find(".title").props()).toHaveProperty("href", props.link);
 });
 
-test("Toggle renders props correctly", () => {
-  const func = jest.fn();
-  const component = mount(<Toggle setDarkTheme={func} />);
-  expect(component.props()).toHaveProperty("setDarkTheme", func);
-});
-
-test("Form renders props correctly", () => {
-  const func = jest.fn();
-  const props = {
-    setData: func,
-    value: "value",
-    setValue: func,
-    requests: ["wow", "how"],
-    setAjaxError: func,
-    setRequests: func
-  };
-  const component = mount(<Form {...props} />);
-  expect(component.props()).toEqual(props);
-});
-
 test("Requests renders props correctly", () => {
   const func = jest.fn();
   const props = {
@@ -115,10 +97,30 @@ test("Requests renders props correctly", () => {
   const component = mount(
     <Requests requests={props.requests} setValue={props.setValue} />
   );
-  expect(component.props()).toEqual(props);
+  for (let index = 0; index < props.requests.length; index++) {
+    expect(
+      component
+        .find(".request")
+        .at(index)
+        .text()
+    ).toBe(props.requests[index]);
+  }
 });
 
-// test("shallow App snapshot", () => {
-//   const component = shallow(<App />);
-//   expect(component).toMatchSnapshot();
-// });
+test("AjaxTime renders props correctly", () => {
+  const time = 10;
+  const component = mount(<AjaxTime ajaxTime={time} />);
+  expect(component.find(".ajaxTimeNumber").text()).toBe(`${time} ms`);
+});
+
+// Snapshots
+
+test("snapshots", () => {
+  expect(shallow(<App />)).toMatchSnapshot();
+  expect(shallow(<Item />)).toMatchSnapshot();
+  expect(shallow(<Toggle />)).toMatchSnapshot();
+  expect(shallow(<Form />)).toMatchSnapshot();
+  expect(shallow(<Requests requests={["wow", "how"]} />)).toMatchSnapshot();
+  expect(shallow(<AjaxTime />)).toMatchSnapshot();
+  expect(shallow(<AjaxError />)).toMatchSnapshot();
+});
