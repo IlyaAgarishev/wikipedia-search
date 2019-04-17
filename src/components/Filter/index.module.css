@@ -25,6 +25,6 @@
 
 .word:hover {
   background: white;
-  color: white;
+  color: #573eff;
   cursor: pointer;
 }
