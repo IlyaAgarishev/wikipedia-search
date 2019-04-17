@@ -41,14 +41,15 @@ const Form = props => {
           e.preventDefault();
           return;
         }
-        let timeBeforeAjax = new Date().getMilliseconds();
+        let timeBeforeAjax = window.performance.now();
         ajaxGetRequest(textInput.current.value)
           .then(data => {
             setData(data);
             addRequest(textInput.current.value.trim(), requests, setRequests);
             setAjaxError({ error: "No error", status: false });
-            let timeAfterAjax = new Date().getMilliseconds();
-            setAjaxTime(timeAfterAjax - timeBeforeAjax);
+            let timeAfterAjax = window.performance.now();
+            let timeOfAjaxRequest = timeAfterAjax - timeBeforeAjax;
+            setAjaxTime(timeOfAjaxRequest.toFixed(5));
           })
           .catch(error => {
             setAjaxError({ error: error, status: true });
