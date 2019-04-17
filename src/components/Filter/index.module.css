@@ -1,12 +1,7 @@
 .filter {
   padding: 20px;
-  position: absolute;
-  left: 0;
-  top: 120px;
-  margin-left: 20px;
-  border: 2px solid #573eff;
-  color: #573eff;
-  width: 150px;
+  border: 2px solid white;
+  color: white;
 }
 
 .filterTitle {
@@ -25,11 +20,11 @@
 .word {
   padding: 5px 10px;
   margin: 5px;
-  border: 1px solid #573eff;
+  border: 1px solid white;
 }
 
 .word:hover {
-  background: #573eff;
+  background: white;
   color: white;
   cursor: pointer;
 }

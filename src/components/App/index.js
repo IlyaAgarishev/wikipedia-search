@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import burger from "../../img/burger.svg";
 import styles from "./index.module.css";
 import Form from "../Form";
 import Item from "../Item";
@@ -23,6 +24,7 @@ const App = () => {
   const [showFilteredData, setShowFilteredData] = useState(false);
   const [ajaxTime, setAjaxTime] = useState(0);
   const [dataNotFound, setDataNotFound] = useState();
+  const [openStuff, setOpenStuff] = useState("start");
 
   const wikiResults = () => {
     if (dataNotFound) {
@@ -60,16 +62,42 @@ const App = () => {
     ? (document.body.style.background = "#05263f")
     : (document.body.style.background = "white");
 
+  const sideBarStyle = () => {
+    if (openStuff === "open") {
+      return [styles.sideBar, styles.sideBarOpen].join(" ");
+    } else if (openStuff === "close") {
+      return [styles.sideBar, styles.sideBarClose].join(" ");
+    } else if (openStuff === "start") {
+      return [styles.sideBar].join(" ");
+    }
+  };
   return (
     <MyContext.Provider value={darkTheme}>
       <div className={styles.app}>
-        <AjaxTime ajaxTime={ajaxTime} />
-        <Toggle setDarkTheme={setDarkTheme} />
-        <Filter
-          data={data}
-          setFilteredData={setFilteredData}
-          setShowFilteredData={setShowFilteredData}
+        <img
+          src={burger}
+          alt="burger"
+          className={styles.burger}
+          onClick={() => {
+            setOpenStuff("open");
+          }}
         />
+        <div className={sideBarStyle()}>
+          <div
+            className={styles.closeBtn}
+            onClick={() => setOpenStuff("close")}
+          >
+            X
+          </div>
+          <AjaxTime ajaxTime={ajaxTime} />
+          <Filter
+            data={data}
+            setFilteredData={setFilteredData}
+            setShowFilteredData={setShowFilteredData}
+          />
+        </div>
+        <Toggle setDarkTheme={setDarkTheme} />
+
         <div className={styles.logo}>wiki search</div>
         <Form
           setData={setData}

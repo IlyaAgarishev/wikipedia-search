@@ -29,6 +29,50 @@ body {
   align-items: center;
 }
 
+.burger {
+  position: absolute;
+  left: 0;
+  margin-left: 20px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.closeBtn {
+  padding: 10px;
+  font-size: 12px;
+  border: 2px solid white;
+  align-self: flex-end;
+  margin-bottom: 20px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.sideBar {
+  position: fixed;
+  width: 200px;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 20px;
+  height: 100%;
+  background: #573eff;
+  display: flex;
+  z-index: 999;
+  flex-direction: column;
+  transform: translate(-240px) !important;
+}
+
+.sideBarOpen {
+  transform: translate(0px) !important;
+  transition: all 0.5s ease;
+}
+
+.sideBarClose {
+  transform: translate(-240px) !important;
+  transition: all 0.5s ease;
+}
+
 @media only screen and (max-width: 800px) {
   body {
     display: block;

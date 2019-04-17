@@ -115,12 +115,12 @@ test("AjaxTime renders props correctly", () => {
 
 // Snapshots
 
-test("snapshots", () => {
-  expect(shallow(<App />)).toMatchSnapshot();
-  expect(shallow(<Item />)).toMatchSnapshot();
-  expect(shallow(<Toggle />)).toMatchSnapshot();
-  expect(shallow(<Form />)).toMatchSnapshot();
-  expect(shallow(<Requests requests={["wow", "how"]} />)).toMatchSnapshot();
-  expect(shallow(<AjaxTime />)).toMatchSnapshot();
-  expect(shallow(<AjaxError />)).toMatchSnapshot();
-});
+// test("snapshots", () => {
+//   expect(shallow(<App />)).toMatchSnapshot();
+//   expect(shallow(<Item />)).toMatchSnapshot();
+//   expect(shallow(<Toggle />)).toMatchSnapshot();
+//   expect(shallow(<Form />)).toMatchSnapshot();
+//   expect(shallow(<Requests requests={["wow", "how"]} />)).toMatchSnapshot();
+//   expect(shallow(<AjaxTime />)).toMatchSnapshot();
+//   expect(shallow(<AjaxError />)).toMatchSnapshot();
+// });

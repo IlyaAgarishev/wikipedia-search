@@ -6,7 +6,6 @@ import { beautifyFrequentWords } from "../../requestFunctions";
 const Filter = props => {
   const { data, setFilteredData, setShowFilteredData } = { ...props };
   let mostFrequentWords = beautifyFrequentWords(data);
-
   return (
     <div className={styles.filter}>
       <div className={styles.filterTitle}>Filter by most frequent words:</div>
