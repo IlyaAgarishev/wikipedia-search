@@ -22,9 +22,9 @@ const Filter = props => {
                 key={index}
                 className={styles.word}
                 onClick={() => {
-                  let filteredData = data.filter(el => {
-                    return el.mostFrequentWord === element;
-                  });
+                  let filteredData = data.filter(
+                    el => el.mostFrequentWord === element
+                  );
                   setFilteredData(filteredData);
                   setShowFilteredData(true);
                 }}
@@ -38,8 +38,10 @@ const Filter = props => {
   );
 };
 
-// Filter.propTypes = {
-//   ajaxTime: PropTypes.number.isRequired
-// };
+Filter.propTypes = {
+  data: PropTypes.array.isRequired,
+  setFilteredData: PropTypes.func.isRequired,
+  setShowFilteredData: PropTypes.func.isRequired
+};
 
 export default Filter;

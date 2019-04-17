@@ -18,15 +18,16 @@ const App = () => {
     error: "No error",
     status: false
   });
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [showFilteredData, setShowFilteredData] = useState(false);
   const [ajaxTime, setAjaxTime] = useState(0);
+  const [dataNotFound, setDataNotFound] = useState();
 
   const wikiResults = () => {
-    if (data && data.length === 0) {
+    if (dataNotFound) {
       return <NoDataFound />;
-    } else if (data && data.length !== 0) {
+    } else {
       return (
         <ul className={styles.items}>
           {showFilteredData
@@ -78,6 +79,7 @@ const App = () => {
           setRequests={setRequests}
           setAjaxTime={setAjaxTime}
           setShowFilteredData={setShowFilteredData}
+          setDataNotFound={setDataNotFound}
         />
         <Requests requests={requests} setValue={setValue} />
         {ajaxError.status ? <AjaxError ajaxError={ajaxError} /> : wikiResults()}
