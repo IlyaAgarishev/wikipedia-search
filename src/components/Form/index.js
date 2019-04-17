@@ -13,7 +13,8 @@ const Form = props => {
     requests,
     setAjaxError,
     setRequests,
-    setAjaxTime
+    setAjaxTime,
+    setShowFilteredData
   } = {
     ...props
   };
@@ -54,6 +55,7 @@ const Form = props => {
             setAjaxError({ error: error, status: true });
           });
         setValue(textInput.current.value);
+        setShowFilteredData(false);
       }}
     >
       <input
@@ -79,7 +81,8 @@ Form.propTypes = {
   setValue: PropTypes.func.isRequired,
   requests: PropTypes.array.isRequired,
   setAjaxError: PropTypes.func.isRequired,
-  setAjaxTime: PropTypes.func.isRequired
+  setAjaxTime: PropTypes.func.isRequired,
+  setShowFilteredData: PropTypes.func.isRequired
 };
 
 export default Form;

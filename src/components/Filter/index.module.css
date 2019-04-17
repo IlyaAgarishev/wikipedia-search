@@ -27,3 +27,9 @@
   margin: 5px;
   border: 1px solid #573eff;
 }
+
+.word:hover {
+  background: #573eff;
+  color: white;
+  cursor: pointer;
+}

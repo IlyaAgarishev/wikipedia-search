@@ -19,6 +19,8 @@ const App = () => {
     status: false
   });
   const [data, setData] = useState();
+  const [filteredData, setFilteredData] = useState([]);
+  const [showFilteredData, setShowFilteredData] = useState(false);
   const [ajaxTime, setAjaxTime] = useState(0);
 
   const wikiResults = () => {
@@ -27,16 +29,27 @@ const App = () => {
     } else if (data && data.length !== 0) {
       return (
         <ul className={styles.items}>
-          {data.map((element, index) => {
-            return (
-              <Item
-                title={element.title}
-                snippet={element.snippet}
-                link={element.link}
-                key={index}
-              />
-            );
-          })}
+          {showFilteredData
+            ? filteredData.map((element, index) => {
+                return (
+                  <Item
+                    title={element.title}
+                    snippet={element.snippet}
+                    link={element.link}
+                    key={index}
+                  />
+                );
+              })
+            : data.map((element, index) => {
+                return (
+                  <Item
+                    title={element.title}
+                    snippet={element.snippet}
+                    link={element.link}
+                    key={index}
+                  />
+                );
+              })}
         </ul>
       );
     }
@@ -50,7 +63,11 @@ const App = () => {
       <div className={styles.app}>
         <AjaxTime ajaxTime={ajaxTime} />
         <Toggle setDarkTheme={setDarkTheme} />
-        <Filter data={data} />
+        <Filter
+          data={data}
+          setFilteredData={setFilteredData}
+          setShowFilteredData={setShowFilteredData}
+        />
         <div className={styles.logo}>wiki search</div>
         <Form
           setData={setData}
@@ -60,6 +77,7 @@ const App = () => {
           setAjaxError={setAjaxError}
           setRequests={setRequests}
           setAjaxTime={setAjaxTime}
+          setShowFilteredData={setShowFilteredData}
         />
         <Requests requests={requests} setValue={setValue} />
         {ajaxError.status ? <AjaxError ajaxError={ajaxError} /> : wikiResults()}
