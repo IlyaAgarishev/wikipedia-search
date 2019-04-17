@@ -38,7 +38,7 @@ body {
 }
 
 .closeBtn {
-  padding: 10px;
+  padding: 5px 10px;
   font-size: 12px;
   border: 2px solid white;
   align-self: flex-end;
@@ -65,12 +65,12 @@ body {
 
 .sideBarOpen {
   transform: translate(0px) !important;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 
 .sideBarClose {
   transform: translate(-240px) !important;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 
 @media only screen and (max-width: 800px) {

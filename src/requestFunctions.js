@@ -96,3 +96,13 @@ export const addRequest = (request, requests, callback) => {
   }
   callback([...new Set(requests)]);
 };
+
+export const sideBarStyle = (openStuff, styles) => {
+  if (openStuff === "open") {
+    return [styles.sideBar, styles.sideBarOpen].join(" ");
+  } else if (openStuff === "close") {
+    return [styles.sideBar, styles.sideBarClose].join(" ");
+  } else if (openStuff === "start") {
+    return [styles.sideBar].join(" ");
+  }
+};

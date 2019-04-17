@@ -10,6 +10,7 @@ import NoDataFound from "../NoDataFound";
 import { MyContext } from "../../context";
 import AjaxTime from "../AjaxTime";
 import Filter from "../Filter";
+import { sideBarStyle } from "../../requestFunctions";
 
 const App = () => {
   const [requests, setRequests] = useState([]);
@@ -62,15 +63,6 @@ const App = () => {
     ? (document.body.style.background = "#05263f")
     : (document.body.style.background = "white");
 
-  const sideBarStyle = () => {
-    if (openStuff === "open") {
-      return [styles.sideBar, styles.sideBarOpen].join(" ");
-    } else if (openStuff === "close") {
-      return [styles.sideBar, styles.sideBarClose].join(" ");
-    } else if (openStuff === "start") {
-      return [styles.sideBar].join(" ");
-    }
-  };
   return (
     <MyContext.Provider value={darkTheme}>
       <div className={styles.app}>
@@ -82,7 +74,7 @@ const App = () => {
             setOpenStuff("open");
           }}
         />
-        <div className={sideBarStyle()}>
+        <div className={sideBarStyle(openStuff, styles)}>
           <div
             className={styles.closeBtn}
             onClick={() => setOpenStuff("close")}
