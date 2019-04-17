@@ -1,11 +1,36 @@
+export const findMostFrequentWord = array => {
+  let counts = {};
+  let compare = 0;
+  let mostFrequent;
+  for (let i = 0; i < array.length; i++) {
+    let word = array[i];
+
+    if (counts[word] === undefined) {
+      counts[word] = 1;
+    } else {
+      counts[word] = counts[word] + 1;
+    }
+    if (counts[word] > compare) {
+      compare = counts[word];
+      mostFrequent = array[i].replace(/\W/g, "").toLowerCase();
+    }
+  }
+  return mostFrequent;
+};
+
 // Transformating wiki data into comfortable array
 export const beautifyResponseText = data => {
   const finalArray = [];
   for (let index = 0; index < data[1].length; index++) {
+    const title = data[1][index];
+    const snippet = data[2][index];
+    const link = data[3][index];
+    const mostFrequentWord = findMostFrequentWord(snippet.split(" "));
     const obj = {
-      title: data[1][index],
-      snippet: data[2][index],
-      link: data[3][index]
+      title: title,
+      snippet: snippet,
+      link: link,
+      mostFrequentWord: mostFrequentWord
     };
     finalArray.push(obj);
   }
@@ -44,20 +69,6 @@ export const getRequestsStringPreview = (request, requests) => {
   return requests.join("") + request;
 };
 
-export const removeRepeatingRequest = (request, requests) => {
-  let conunter = 0;
-
-  requests.forEach((element, index) => {
-    if (element === request) {
-      conunter++;
-      if (conunter > 1) {
-        requests.splice(index, 1);
-      }
-    }
-  });
-  return requests;
-};
-
 export const addRequest = (request, requests, callback) => {
   if (request.length > 27) {
     request = request.slice(0, 27) + "...";
@@ -74,6 +85,5 @@ export const addRequest = (request, requests, callback) => {
   } else {
     requests.unshift(request);
   }
-  removeRepeatingRequest(request, requests);
-  callback([...requests]);
+  callback([...new Set(requests)]);
 };

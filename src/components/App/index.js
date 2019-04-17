@@ -8,6 +8,7 @@ import AjaxError from "../AjaxError";
 import NoDataFound from "../NoDataFound";
 import { MyContext } from "../../context";
 import AjaxTime from "../AjaxTime";
+import Filter from "../Filter";
 
 const App = () => {
   const [requests, setRequests] = useState([]);
@@ -49,6 +50,7 @@ const App = () => {
       <div className={styles.app}>
         <AjaxTime ajaxTime={ajaxTime} />
         <Toggle setDarkTheme={setDarkTheme} />
+        <Filter data={data} />
         <div className={styles.logo}>wiki search</div>
         <Form
           setData={setData}
