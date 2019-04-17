@@ -48,8 +48,7 @@ const Form = props => {
             addRequest(textInput.current.value.trim(), requests, setRequests);
             setAjaxError({ error: "No error", status: false });
             let timeAfterAjax = window.performance.now();
-            let timeOfAjaxRequest = timeAfterAjax - timeBeforeAjax;
-            setAjaxTime(timeOfAjaxRequest.toFixed(5));
+            setAjaxTime(timeAfterAjax - timeBeforeAjax);
           })
           .catch(error => {
             setAjaxError({ error: error, status: true });

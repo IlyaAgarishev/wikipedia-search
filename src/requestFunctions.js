@@ -46,7 +46,8 @@ export const getRequestsStringPreview = (request, requests) => {
 
 export const removeRepeatingRequest = (request, requests) => {
   let conunter = 0;
-  requests.map((element, index) => {
+
+  requests.forEach((element, index) => {
     if (element === request) {
       conunter++;
       if (conunter > 1) {
