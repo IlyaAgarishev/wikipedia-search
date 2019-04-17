@@ -1,3 +1,12 @@
+export const beautifyFrequentWords = data => {
+  if (data) {
+    let mostFrequentWords = data.map(element => {
+      return element.mostFrequentWord;
+    });
+    return [...new Set(mostFrequentWords)];
+  }
+};
+
 export const findMostFrequentWord = array => {
   let counts = {};
   let compare = 0;

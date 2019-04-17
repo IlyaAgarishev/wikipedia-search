@@ -59,6 +59,7 @@ const App = () => {
   darkTheme
     ? (document.body.style.background = "#05263f")
     : (document.body.style.background = "white");
+
   return (
     <MyContext.Provider value={darkTheme}>
       <div className={styles.app}>
