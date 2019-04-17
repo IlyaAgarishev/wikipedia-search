@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useContext } from "react";
+import React, { useRef, useEffect, useContext, useState } from "react";
 import styles from "./index.module.css";
 import search from "../../img/search.svg";
 import PropTypes from "prop-types";
@@ -15,12 +15,14 @@ const Form = props => {
     setRequests,
     setAjaxTime,
     setShowFilteredData,
-    setDataNotFound
+    setDataNotFound,
+    setOpenStuff
   } = {
     ...props
   };
   const darkTheme = useContext(MyContext);
   const textInput = useRef(null);
+  const [openSideBarOnce, setOpenSideBarOnce] = useState(true);
 
   useEffect(() => {
     textInput.current.value = value;
@@ -63,6 +65,10 @@ const Form = props => {
           });
         setValue(textInput.current.value);
         setShowFilteredData(false);
+        if (openSideBarOnce && window.innerWidth > 1330) {
+          setOpenStuff("open");
+          setOpenSideBarOnce(false);
+        }
       }}
     >
       <input
