@@ -7,7 +7,8 @@ export const beautifyFrequentWords = data => {
   }
 };
 
-export const findMostFrequentWord = array => {
+export const findMostFrequentWord = string => {
+  let array = string.toLowerCase().split(" ");
   let counts = {};
   let compare = 0;
   let mostFrequent;
@@ -21,7 +22,7 @@ export const findMostFrequentWord = array => {
     }
     if (counts[word] > compare) {
       compare = counts[word];
-      mostFrequent = array[i].replace(/\W/g, "").toLowerCase();
+      mostFrequent = array[i].replace(/\W/g, "");
     }
   }
   return mostFrequent;
@@ -34,7 +35,7 @@ export const beautifyResponseText = data => {
     const title = data[1][index];
     const snippet = data[2][index];
     const link = data[3][index];
-    const mostFrequentWord = findMostFrequentWord(snippet.split(" "));
+    const mostFrequentWord = findMostFrequentWord(snippet);
     const obj = {
       title: title,
       snippet: snippet,
