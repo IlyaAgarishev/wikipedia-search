@@ -166,6 +166,52 @@ test("AjaxTime renders props correctly", () => {
   );
 });
 
+test("Filter renders props correctly", () => {
+  const data = [
+    {
+      title: "title",
+      snippet: "snippet",
+      mostFrequentWord: "word_1",
+      link: "www.test.com"
+    },
+    {
+      title: "title",
+      snippet: "snippet",
+      mostFrequentWord: "word_2",
+      link: "www.test.com"
+    },
+    {
+      title: "title",
+      snippet: "snippet",
+      mostFrequentWord: "word_3",
+      link: "www.test.com"
+    },
+    {
+      title: "title",
+      snippet: "snippet",
+      mostFrequentWord: "word_3",
+      link: "www.test.com"
+    }
+  ];
+  const component = mount(
+    <Filter
+      data={data}
+      setFilteredData={jest.fn()}
+      setShowFilteredData={jest.fn()}
+    />
+  );
+  let mostFrequentWords = beautifyFrequentWords(data);
+
+  for (let index = 0; index < mostFrequentWords.length; index++) {
+    expect(
+      component
+        .find(".word")
+        .at(index)
+        .text()
+    ).toBe(mostFrequentWords[index]);
+  }
+});
+
 // Snapshots
 
 // test("snapshots", () => {
