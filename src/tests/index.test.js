@@ -11,12 +11,12 @@ import {
   beautifyResponseText,
   ajaxGetRequest,
   getRequestsStringPreview,
-  removeRepeatingRequest,
   addRequest,
   findMostFrequentWord,
   beautifyFrequentWords
 } from "../ponyFunctions.js";
 import AjaxError from "../components/AjaxError";
+import Filter from "../components/Filter";
 
 // Functions testing
 
@@ -80,103 +80,100 @@ test("beautifyResponseText returns right array", () => {
   ]);
 });
 
-// test("Ajax get request returns 10 length array", () => {
-//   return ajaxGetRequest(randomWords()).then(data => {
-//     expect(data.length).toBe(10);
-//     expect(Array.isArray(data)).toBe(true);
-//   });
+test("ajaxGetRequest returns right array", () => {
+  const limit = [10, 50, 100];
+  const randomLimit = limit[Math.floor(Math.random() * limit.length)];
+  return ajaxGetRequest(randomWords()).then(data => {
+    expect(data.length).toBeLessThanOrEqual(randomLimit);
+    expect(Array.isArray(data)).toBe(true);
+  });
+});
+
+test("ajaxGetRequest - length of objects of ajax returned array equals 4 and items in every object are strings", () => {
+  return ajaxGetRequest(randomWords()).then(data => {
+    for (let i = 0; i < data.length; i++) {
+      expect(Object.keys(data[i]).length).toBe(4);
+      Object.keys(data[i]).forEach(item => {
+        expect(typeof item).toBe("string");
+      });
+    }
+  });
+});
+
+test("getRequestsStringPreview is a string and has correct length", () => {
+  const request = "request";
+  const requests = ["one", "two", "three"];
+  const compressedString = request + requests.join("");
+  expect(typeof getRequestsStringPreview(request, requests)).toBe("string");
+  expect(getRequestsStringPreview(request, requests).length).toBe(
+    compressedString.length
+  );
+});
+
+test("addRequest returns array and sum of lengths array elements <= 60 ", () => {
+  const request = "request";
+  const requests = [
+    "oneoneoneoneoneoneoneoneoneoneoneoneoneone",
+    "twotwotwotwotwotwotwotwotwotwotwotwotwotwotwo",
+    "threethreethreethreethreethreiethreethree"
+  ];
+  addRequest(request, requests, data => {
+    expect(Array.isArray(data)).toBe(true);
+    expect(data.join("").length < 60).toBe(true);
+  });
+});
+
+// Components testing
+
+test("Item renders props correctly", () => {
+  const props = {
+    title: "title",
+    snippet: "snippet",
+    link: "link"
+  };
+  const component = mount(
+    <Item title={props.title} snippet={props.snippet} link={props.link} />
+  );
+  expect(component.find(".title").text()).toBe(props.title);
+  expect(component.find(".snippet").text()).toBe(props.snippet);
+  expect(component.find(".title").props()).toHaveProperty("href", props.link);
+});
+
+test("Requests renders props correctly", () => {
+  const func = jest.fn();
+  const props = {
+    requests: ["wow", "how"],
+    setValue: func
+  };
+  const component = mount(
+    <Requests requests={props.requests} setValue={props.setValue} />
+  );
+  for (let index = 0; index < props.requests.length; index++) {
+    expect(
+      component
+        .find(".request")
+        .at(index)
+        .text()
+    ).toBe(props.requests[index]);
+  }
+});
+
+test("AjaxTime renders props correctly", () => {
+  const time = 10;
+  const component = mount(<AjaxTime ajaxTime={time} />);
+  expect(component.find(".ajaxTimeNumber").text()).toBe(
+    `${time.toFixed(5)} ms`
+  );
+});
+
+// Snapshots
+
+// test("snapshots", () => {
+//   expect(shallow(<App />)).toMatchSnapshot();
+//   expect(shallow(<Item />)).toMatchSnapshot();
+//   expect(shallow(<Toggle />)).toMatchSnapshot();
+//   expect(shallow(<Form />)).toMatchSnapshot();
+//   expect(shallow(<Requests requests={["wow", "how"]} />)).toMatchSnapshot();
+//   expect(shallow(<AjaxTime />)).toMatchSnapshot();
+//   expect(shallow(<AjaxError />)).toMatchSnapshot();
 // });
-
-// test("Length of objects of ajax returned array equals 3 and items in every object are strings", () => {
-//   return ajaxGetRequest(randomWords()).then(data => {
-//     for (let i = 0; i < data.length; i++) {
-//       expect(Object.keys(data[i]).length).toBe(3);
-//       Object.keys(data[i]).forEach(item => {
-//         expect(typeof item).toBe("string");
-//       });
-//     }
-//   });
-// });
-
-// test("getRequestsStringPreview is a string and has correct length", () => {
-//   const request = "request";
-//   const requests = ["one", "two", "three"];
-//   const compressedString = request + requests.join("");
-//   expect(typeof getRequestsStringPreview(request, requests)).toBe("string");
-//   expect(getRequestsStringPreview(request, requests).length).toBe(
-//     compressedString.length
-//   );
-// });
-
-// test("removeRepeatingRequest returns right array", () => {
-//   let request = "one";
-//   let requests = ["one", "two", "one"];
-//   expect(Array.isArray(removeRepeatingRequest(request, requests))).toBe(true);
-//   expect(removeRepeatingRequest(request, requests)).toEqual(["one", "two"]);
-// });
-
-// test("addRequest returns array and sum of lengths array elements <= 60 ", () => {
-//   const request = "request";
-//   const requests = [
-//     "oneoneoneoneoneoneoneoneoneoneoneoneoneone",
-//     "twotwotwotwotwotwotwotwotwotwotwotwotwotwotwo",
-//     "threethreethreethreethreethreiethreethree"
-//   ];
-//   addRequest(request, requests, data => {
-//     expect(Array.isArray(data)).toBe(true);
-//     expect(data.join("").length < 60).toBe(true);
-//   });
-// });
-
-// // Components testing
-
-// test("Item renders props correctly", () => {
-//   const props = {
-//     title: "title",
-//     snippet: "snippet",
-//     link: "link"
-//   };
-//   const component = mount(
-//     <Item title={props.title} snippet={props.snippet} link={props.link} />
-//   );
-//   expect(component.find(".title").text()).toBe(props.title);
-//   expect(component.find(".snippet").text()).toBe(props.snippet);
-//   expect(component.find(".title").props()).toHaveProperty("href", props.link);
-// });
-
-// test("Requests renders props correctly", () => {
-//   const func = jest.fn();
-//   const props = {
-//     requests: ["wow", "how"],
-//     setValue: func
-//   };
-//   const component = mount(
-//     <Requests requests={props.requests} setValue={props.setValue} />
-//   );
-//   for (let index = 0; index < props.requests.length; index++) {
-//     expect(
-//       component
-//         .find(".request")
-//         .at(index)
-//         .text()
-//     ).toBe(props.requests[index]);
-//   }
-// });
-
-// test("AjaxTime renders props correctly", () => {
-//   const time = 10;
-//   const component = mount(<AjaxTime ajaxTime={time} />);
-//   expect(component.find(".ajaxTimeNumber").text()).toBe(`${time} ms`);
-// });
-
-// // Snapshots
-
-// // test("snapshots", () => {
-// //   expect(shallow(<App />)).toMatchSnapshot();
-// //   expect(shallow(<Item />)).toMatchSnapshot();
-// //   expect(shallow(<Toggle />)).toMatchSnapshot();
-// //   expect(shallow(<Form />)).toMatchSnapshot();
-// //   expect(shallow(<Requests requests={["wow", "how"]} />)).toMatchSnapshot();
-// //   expect(shallow(<AjaxTime />)).toMatchSnapshot();
-// //   expect(shallow(<AjaxError />)).toMatchSnapshot();
-// // });
