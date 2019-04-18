@@ -1,0 +1,252 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshots 1`] = `
+<ContextProvider
+  value={false}
+>
+  <div
+    className="app"
+  >
+    <img
+      alt="burger"
+      className="burger"
+      onClick={[Function]}
+      src="burger.svg"
+    />
+    <div
+      className="sideBar"
+    >
+      <div
+        className="closeBtn"
+        onClick={[Function]}
+      >
+        X
+      </div>
+      <AjaxTime
+        ajaxTime={0}
+      />
+      <Limit
+        limit={10}
+        setLimit={[Function]}
+      />
+      <Filter
+        data={Array []}
+        setFilteredData={[Function]}
+        setShowFilteredData={[Function]}
+      />
+    </div>
+    <ToggleTheme
+      setDarkTheme={[Function]}
+    />
+    <div
+      className="logo"
+    >
+      wiki search
+    </div>
+    <Form
+      limit={10}
+      requests={Array []}
+      setAjaxError={[Function]}
+      setAjaxTime={[Function]}
+      setData={[Function]}
+      setDataNotFound={[Function]}
+      setOpenStuff={[Function]}
+      setRequests={[Function]}
+      setShowFilteredData={[Function]}
+      setValue={[Function]}
+      value=""
+    />
+    <Requests
+      requests={Array []}
+      setValue={[Function]}
+    />
+    <ul
+      className="items"
+    />
+  </div>
+</ContextProvider>
+`;
+
+exports[`snapshots 2`] = `
+<li
+  className="item"
+>
+  <a
+    className="title"
+    href="link"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    title
+  </a>
+  <div
+    className="snippet"
+  >
+    snippet
+  </div>
+</li>
+`;
+
+exports[`snapshots 3`] = `
+<label
+  className="toggleTheme"
+>
+  <Toggle
+    defaultChecked={false}
+    icons={false}
+    onChange={[Function]}
+  />
+</label>
+`;
+
+exports[`snapshots 4`] = `
+<form
+  className="submitForm"
+  onSubmit={[Function]}
+>
+  <input
+    className="textInput"
+    required={true}
+    type="text"
+  />
+  <button
+    className="submitButton"
+    type="submit"
+  >
+    <img
+      alt=""
+      className="searchIcon"
+      src="search.svg"
+    />
+  </button>
+</form>
+`;
+
+exports[`snapshots 5`] = `
+<div
+  className="requests"
+>
+  <div
+    className="request"
+    key="0"
+    onClick={[Function]}
+  >
+    wow
+  </div>
+  <div
+    className="request"
+    key="1"
+    onClick={[Function]}
+  >
+    how
+  </div>
+</div>
+`;
+
+exports[`snapshots 6`] = `
+<div
+  className="ajaxTime"
+>
+  <strong>
+    Time of request:
+  </strong>
+  <div
+    className="ajaxTimeNumber"
+  >
+    10.00000
+     ms
+  </div>
+</div>
+`;
+
+exports[`snapshots 7`] = `
+<div
+  className="ajaxError"
+>
+  <div
+    className="basicDescription"
+  >
+    <span
+      style={
+        Object {
+          "color": "red",
+        }
+      }
+    >
+      Error occurred.
+    </span>
+     Try to reload the page or check the internet connection :(
+  </div>
+  <div>
+    <div
+      className="moreInfo"
+      onClick={[Function]}
+    >
+      More Info
+    </div>
+  </div>
+</div>
+`;
+
+exports[`snapshots 8`] = `
+<div
+  className="filter"
+>
+  <strong>
+    Filter by most frequent words:
+  </strong>
+  <ul
+    className="list"
+  >
+    <li
+      className="word"
+      key="0"
+      onClick={[Function]}
+    >
+      word_1
+    </li>
+    <li
+      className="word"
+      key="1"
+      onClick={[Function]}
+    >
+      word_2
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`snapshots 9`] = `
+<div
+  className="limit"
+>
+  <strong>
+    Set limit of wiki results:
+  </strong>
+  <ul
+    className="limitButtons"
+  >
+    <li
+      className="limitButton limitButtonChosen"
+      key="0"
+      onClick={[Function]}
+    >
+      10
+    </li>
+    <li
+      className="limitButton"
+      key="1"
+      onClick={[Function]}
+    >
+      50
+    </li>
+    <li
+      className="limitButton"
+      key="2"
+      onClick={[Function]}
+    >
+      100
+    </li>
+  </ul>
+</div>
+`;

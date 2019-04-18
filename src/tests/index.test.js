@@ -228,12 +228,65 @@ test("Limit renders props correctly", () => {
 
 // Snapshots
 
-// test("snapshots", () => {
-//   expect(shallow(<App />)).toMatchSnapshot();
-//   expect(shallow(<Item />)).toMatchSnapshot();
-//   expect(shallow(<Toggle />)).toMatchSnapshot();
-//   expect(shallow(<Form />)).toMatchSnapshot();
-//   expect(shallow(<Requests requests={["wow", "how"]} />)).toMatchSnapshot();
-//   expect(shallow(<AjaxTime />)).toMatchSnapshot();
-//   expect(shallow(<AjaxError />)).toMatchSnapshot();
-// });
+test("snapshots", () => {
+  const data = [
+    {
+      title: "title",
+      snippet: "snippet",
+      mostFrequentWord: "word_1",
+      link: "www.test.com"
+    },
+    {
+      title: "title",
+      snippet: "snippet",
+      mostFrequentWord: "word_2",
+      link: "www.test.com"
+    }
+  ];
+  expect(shallow(<App />)).toMatchSnapshot();
+  expect(
+    shallow(<Item title={"title"} snippet={"snippet"} link={"link"} />)
+  ).toMatchSnapshot();
+  expect(shallow(<Toggle setDarkTheme={jest.fn()} />)).toMatchSnapshot();
+  expect(
+    shallow(
+      <Form
+        setData={jest.fn()}
+        value={"Title"}
+        setValue={jest.fn()}
+        requests={["wow", "how"]}
+        setAjaxError={jest.fn()}
+        setRequests={jest.fn()}
+        setAjaxTime={jest.fn()}
+        setShowFilteredData={jest.fn()}
+        setDataNotFound={jest.fn()}
+        setOpenStuff={jest.fn()}
+        limit={10}
+      />
+    )
+  ).toMatchSnapshot();
+  expect(
+    shallow(<Requests requests={["wow", "how"]} setValue={jest.fn()} />)
+  ).toMatchSnapshot();
+  expect(shallow(<AjaxTime ajaxTime={10} />)).toMatchSnapshot();
+  expect(
+    shallow(
+      <AjaxError
+        ajaxError={{
+          error: "No error",
+          status: false
+        }}
+      />
+    )
+  ).toMatchSnapshot();
+  expect(
+    shallow(
+      <Filter
+        data={data}
+        setFilteredData={jest.fn()}
+        setShowFilteredData={jest.fn()}
+      />
+    )
+  ).toMatchSnapshot();
+  expect(shallow(<Limit limit={10} setLimit={jest.fn()} />)).toMatchSnapshot();
+});
