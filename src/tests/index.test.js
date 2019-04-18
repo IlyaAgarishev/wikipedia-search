@@ -17,6 +17,7 @@ import {
 } from "../ponyFunctions.js";
 import AjaxError from "../components/AjaxError";
 import Filter from "../components/Filter";
+import Limit from "../components/Limit";
 
 // Functions testing
 
@@ -209,6 +210,19 @@ test("Filter renders props correctly", () => {
         .at(index)
         .text()
     ).toBe(mostFrequentWords[index]);
+  }
+});
+
+test("Limit renders props correctly", () => {
+  const component = mount(<Limit limit={10} setLimit={jest.fn()} />);
+  const limitsArray = ["10", "50", "100"];
+  for (let index = 0; index < limitsArray.length; index++) {
+    expect(
+      component
+        .find(".limitButton")
+        .at(index)
+        .text()
+    ).toBe(limitsArray[index]);
   }
 });
 
