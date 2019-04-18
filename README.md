@@ -10,6 +10,7 @@ See demo: https://wikipedia-search.surge.sh/
 
 - [x] Save requests
 - [x] Filter
+- [x] Aggregated information
 - [x] Dark Theme
 - [x] Tests
 - [x] Request time
