@@ -11,7 +11,7 @@ import { MyContext } from "../../context";
 import AjaxTime from "../AjaxTime";
 import Filter from "../Filter";
 import Limit from "../Limit";
-import { sideBarStyle } from "../../ponyFunctions";
+import { sideBarStyle } from "../../utils";
 
 const App = () => {
   const [requests, setRequests] = useState([]);

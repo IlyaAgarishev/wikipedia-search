@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useContext, useState } from "react";
 import styles from "./index.module.css";
 import search from "../../img/search.svg";
 import PropTypes from "prop-types";
-import { ajaxGetRequest, addRequest } from "../../ponyFunctions";
+import { ajaxGetRequest, addRequest } from "../../utils";
 import { MyContext } from "../../context";
 
 const Form = props => {

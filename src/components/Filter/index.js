@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./index.module.css";
 import PropTypes from "prop-types";
-import { beautifyFrequentWords } from "../../ponyFunctions";
+import { beautifyFrequentWords } from "../../utils";
 
 const Filter = props => {
   const { data, setFilteredData, setShowFilteredData } = { ...props };

@@ -14,7 +14,7 @@ import {
   addRequest,
   findMostFrequentWord,
   beautifyFrequentWords
-} from "../ponyFunctions.js";
+} from "../utils";
 import AjaxError from "../components/AjaxError";
 import Filter from "../components/Filter";
 import Limit from "../components/Limit";
