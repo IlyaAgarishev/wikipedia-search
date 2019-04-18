@@ -9,7 +9,10 @@ See demo: https://wikipedia-search.surge.sh/
 ## TODO
 
 - [x] Save requests
-- [ ] Woo
+- [x] Filter
+- [x] Dark Theme
+- [x] Tests
+- [x] Request time
 
 ### Available commands:
 
