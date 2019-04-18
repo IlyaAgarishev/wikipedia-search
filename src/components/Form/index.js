@@ -16,7 +16,8 @@ const Form = props => {
     setAjaxTime,
     setShowFilteredData,
     setDataNotFound,
-    setOpenStuff
+    setOpenStuff,
+    limit
   } = {
     ...props
   };
@@ -46,7 +47,7 @@ const Form = props => {
           return;
         }
         let timeBeforeAjax = window.performance.now();
-        ajaxGetRequest(textInput.current.value)
+        ajaxGetRequest(textInput.current.value, limit)
           .then(data => {
             if (data.length > 0) {
               setData(data);
@@ -96,7 +97,8 @@ Form.propTypes = {
   setAjaxError: PropTypes.func.isRequired,
   setAjaxTime: PropTypes.func.isRequired,
   setShowFilteredData: PropTypes.func.isRequired,
-  setDataNotFound: PropTypes.func.isRequired
+  setDataNotFound: PropTypes.func.isRequired,
+  limit: PropTypes.number.isRequired
 };
 
 export default Form;

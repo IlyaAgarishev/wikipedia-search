@@ -105,6 +105,7 @@ const App = () => {
           setShowFilteredData={setShowFilteredData}
           setDataNotFound={setDataNotFound}
           setOpenStuff={setOpenStuff}
+          limit={limit}
         />
         <Requests requests={requests} setValue={setValue} />
         {ajaxError.status ? <AjaxError ajaxError={ajaxError} /> : wikiResults()}

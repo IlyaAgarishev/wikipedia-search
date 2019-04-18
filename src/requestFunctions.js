@@ -46,13 +46,13 @@ export const beautifyResponseText = data => {
   return finalArray;
 };
 
-export const ajaxGetRequest = title => {
+export const ajaxGetRequest = (title, limit) => {
   return new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest();
 
     xhr.open(
       "GET",
-      `https://en.wikipedia.org/w/api.php?action=opensearch&search=${title}&origin=*&format=json`,
+      `https://en.wikipedia.org/w/api.php?action=opensearch&search=${title}&origin=*&format=json&limit=${limit}`,
       true
     );
 

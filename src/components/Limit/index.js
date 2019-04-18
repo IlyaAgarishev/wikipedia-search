@@ -18,6 +18,7 @@ const Limit = props => {
                   : styles.limitButton
               }
               onClick={() => setLimit(number)}
+              key={index}
             >
               {number}
             </li>
