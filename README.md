@@ -6,6 +6,11 @@ See demo: https://wikipedia-search.surge.sh/
 
 ![Imgur](https://i.imgur.com/Ixn8IZQ.png)
 
+## TODO
+
+- [x] Save requests
+- [ ] Woo
+
 ### Available commands:
 
 - `yarn start` - start dev server and open browser
