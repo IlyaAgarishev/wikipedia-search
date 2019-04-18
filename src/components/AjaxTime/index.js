@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const AjaxTime = ({ ajaxTime }) => {
   return (
     <div className={styles.ajaxTime}>
-      <div className={styles.ajaxTimeText}>Time of request:</div>
+      <strong>Time of request:</strong>
       <div className={styles.ajaxTimeNumber}>{ajaxTime.toFixed(5)} ms</div>
     </div>
   );

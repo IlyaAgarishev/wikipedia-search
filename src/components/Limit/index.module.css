@@ -1,0 +1,32 @@
+.limit {
+  padding: 20px;
+  border: 2px solid white;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.limitButtons {
+  list-style-type: none;
+  margin: 0;
+  margin-top: 10px;
+  padding: 0;
+  display: flex;
+}
+
+.limitButton {
+  padding: 10px;
+  border: 1px solid white;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.limitButtonChosen {
+  color: #573eff;
+  background: white;
+}
+
+.limitButton:hover {
+  color: #573eff;
+  background: white;
+}

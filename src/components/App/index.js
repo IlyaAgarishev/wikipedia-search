@@ -10,6 +10,7 @@ import NoDataFound from "../NoDataFound";
 import { MyContext } from "../../context";
 import AjaxTime from "../AjaxTime";
 import Filter from "../Filter";
+import Limit from "../Limit";
 import { sideBarStyle } from "../../requestFunctions";
 
 const App = () => {
@@ -25,7 +26,8 @@ const App = () => {
   const [showFilteredData, setShowFilteredData] = useState(false);
   const [ajaxTime, setAjaxTime] = useState(0);
   const [dataNotFound, setDataNotFound] = useState();
-  const [openStuff, setOpenStuff] = useState("start");
+  const [openStuff, setOpenStuff] = useState("open");
+  const [limit, setLimit] = useState(10);
 
   const wikiResults = () => {
     if (dataNotFound) {
@@ -82,6 +84,7 @@ const App = () => {
             X
           </div>
           <AjaxTime ajaxTime={ajaxTime} />
+          <Limit limit={limit} setLimit={setLimit} />
           <Filter
             data={data}
             setFilteredData={setFilteredData}

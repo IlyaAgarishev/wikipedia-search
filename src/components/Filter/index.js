@@ -8,7 +8,7 @@ const Filter = props => {
   let mostFrequentWords = beautifyFrequentWords(data);
   return (
     <div className={styles.filter}>
-      <div className={styles.filterTitle}>Filter by most frequent words:</div>
+      <strong>Filter by most frequent words:</strong>
       <ul className={styles.list}>
         {mostFrequentWords.map((element, index) => {
           if (element)
