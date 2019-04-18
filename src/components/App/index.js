@@ -11,7 +11,7 @@ import { MyContext } from "../../context";
 import AjaxTime from "../AjaxTime";
 import Filter from "../Filter";
 import Limit from "../Limit";
-import { sideBarStyle } from "../../requestFunctions";
+import { sideBarStyle } from "../../ponyFunctions";
 
 const App = () => {
   const [requests, setRequests] = useState([]);
@@ -26,7 +26,7 @@ const App = () => {
   const [showFilteredData, setShowFilteredData] = useState(false);
   const [ajaxTime, setAjaxTime] = useState(0);
   const [dataNotFound, setDataNotFound] = useState();
-  const [openStuff, setOpenStuff] = useState("open");
+  const [openStuff, setOpenStuff] = useState("start");
   const [limit, setLimit] = useState(10);
 
   const wikiResults = () => {
