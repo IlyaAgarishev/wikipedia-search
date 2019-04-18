@@ -13,11 +13,47 @@ import {
   getRequestsStringPreview,
   removeRepeatingRequest,
   addRequest,
-  findMostFrequentWord
+  findMostFrequentWord,
+  beautifyFrequentWords
 } from "../ponyFunctions.js";
 import AjaxError from "../components/AjaxError";
 
 // Functions testing
+
+test("beautifyFrequentWords", () => {
+  const data = [
+    {
+      title: "title",
+      snippet: "snippet",
+      mostFrequentWord: "word_1",
+      link: "www.test.com"
+    },
+    {
+      title: "title",
+      snippet: "snippet",
+      mostFrequentWord: "word_2",
+      link: "www.test.com"
+    },
+    {
+      title: "title",
+      snippet: "snippet",
+      mostFrequentWord: "word_3",
+      link: "www.test.com"
+    },
+    {
+      title: "title",
+      snippet: "snippet",
+      mostFrequentWord: "word_3",
+      link: "www.test.com"
+    }
+  ];
+  expect(Array.isArray(beautifyFrequentWords(data))).toBe(true);
+  expect(beautifyFrequentWords(data)).toEqual([
+    data[0].mostFrequentWord,
+    data[1].mostFrequentWord,
+    data[2].mostFrequentWord
+  ]);
+});
 
 test("findMostFrequentWord", () => {
   const data = "Wow Wow How How how";
