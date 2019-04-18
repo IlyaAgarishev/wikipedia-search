@@ -108,6 +108,9 @@ const App = () => {
           limit={limit}
         />
         <Requests requests={requests} setValue={setValue} />
+        {data.length ? (
+          <div className={styles.resultsLength}>{data.length} results</div>
+        ) : null}
         {ajaxError.status ? <AjaxError ajaxError={ajaxError} /> : wikiResults()}
       </div>
     </MyContext.Provider>

@@ -83,6 +83,12 @@ body {
   transition: all 0.3s ease;
 }
 
+.resultsLength {
+  margin-top: 5px;
+  color: #573eff;
+  align-self: flex-end;
+}
+
 @media only screen and (max-width: 800px) {
   body {
     display: block;
