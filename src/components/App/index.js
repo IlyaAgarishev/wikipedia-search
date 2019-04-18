@@ -74,7 +74,7 @@ const App = () => {
             setOpenStuff("open");
           }}
         />
-        <div className={sideBarStyle(openStuff, styles)}>
+        <div className={sideBarStyle(openStuff, styles, darkTheme)}>
           <div
             className={styles.closeBtn}
             onClick={() => setOpenStuff("close")}

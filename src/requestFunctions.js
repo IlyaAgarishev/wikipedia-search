@@ -97,15 +97,36 @@ export const addRequest = (request, requests, callback) => {
   callback([...new Set(requests)]);
 };
 
-export const sideBarStyle = (openStuff, styles) => {
-  switch (openStuff) {
-    case "open":
-      return [styles.sideBar, styles.sideBarOpen].join(" ");
-    case "close":
-      return [styles.sideBar, styles.sideBarClose].join(" ");
-    case "start":
-      return [styles.sideBar].join(" ");
-    default:
-      break;
+export const sideBarStyle = (openStuff, styles, darkTheme) => {
+  if (darkTheme === false) {
+    switch (openStuff) {
+      case "open":
+        return [styles.sideBar, styles.sideBarOpen].join(" ");
+      case "close":
+        return [styles.sideBar, styles.sideBarClose].join(" ");
+      case "start":
+        return [styles.sideBar].join(" ");
+      default:
+        break;
+    }
+  } else {
+    switch (openStuff) {
+      case "open":
+        return [
+          styles.sideBar,
+          styles.sideBarOpen,
+          styles.sideBarDarkTheme
+        ].join(" ");
+      case "close":
+        return [
+          styles.sideBar,
+          styles.sideBarClose,
+          styles.sideBarDarkTheme
+        ].join(" ");
+      case "start":
+        return [styles.sideBar, styles.sideBarDarkTheme].join(" ");
+      default:
+        break;
+    }
   }
 };

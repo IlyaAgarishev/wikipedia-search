@@ -48,6 +48,12 @@ body {
   cursor: pointer;
 }
 
+.closeBtn:hover {
+  background: white;
+  color: #573eff;
+  transition: all 0.2s ease;
+}
+
 .sideBar {
   position: fixed;
   width: 200px;
@@ -61,6 +67,10 @@ body {
   z-index: 999;
   flex-direction: column;
   transform: translate(-240px) !important;
+}
+
+.sideBarDarkTheme {
+  background: #083c64;
 }
 
 .sideBarOpen {
