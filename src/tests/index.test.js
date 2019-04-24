@@ -19,35 +19,69 @@ import AjaxError from "../components/AjaxError";
 import Filter from "../components/Filter";
 import Limit from "../components/Limit";
 
+// tools for testing
+const func = jest.fn();
+const props = {
+  Item: { title: "title", snippet: "snippet", link: "link" },
+  Requests: { requests: ["wow", "how"], setValue: func },
+  AjaxTime: { ajaxTime: 10 },
+  Filter: {
+    data: [
+      {
+        title: "title",
+        snippet: "snippet",
+        mostFrequentWord: "word_1",
+        link: "www.test.com"
+      },
+      {
+        title: "title",
+        snippet: "snippet",
+        mostFrequentWord: "word_2",
+        link: "www.test.com"
+      },
+      {
+        title: "title",
+        snippet: "snippet",
+        mostFrequentWord: "word_3",
+        link: "www.test.com"
+      },
+      {
+        title: "title",
+        snippet: "snippet",
+        mostFrequentWord: "word_3",
+        link: "www.test.com"
+      }
+    ],
+    setFilteredData: func,
+    setShowFilteredData: func
+  },
+  Limit: { limit: 10, setLimit: func },
+  Toggle: { setDarkTheme: func },
+  Form: {
+    setData: func,
+    value: "Title",
+    setValue: func,
+    requests: ["wow", "how"],
+    setAjaxError: func,
+    setRequests: func,
+    setAjaxTime: func,
+    setShowFilteredData: func,
+    setDataNotFound: func,
+    setOpenStuff: func,
+    limit: 10
+  },
+  AjaxError: {
+    ajaxError: {
+      error: "No error",
+      status: false
+    }
+  }
+};
+
 // Functions testing
 
 test("beautifyFrequentWords", () => {
-  const data = [
-    {
-      title: "title",
-      snippet: "snippet",
-      mostFrequentWord: "word_1",
-      link: "www.test.com"
-    },
-    {
-      title: "title",
-      snippet: "snippet",
-      mostFrequentWord: "word_2",
-      link: "www.test.com"
-    },
-    {
-      title: "title",
-      snippet: "snippet",
-      mostFrequentWord: "word_3",
-      link: "www.test.com"
-    },
-    {
-      title: "title",
-      snippet: "snippet",
-      mostFrequentWord: "word_3",
-      link: "www.test.com"
-    }
-  ];
+  const data = props.Filter.data;
   expect(Array.isArray(beautifyFrequentWords(data))).toBe(true);
   expect(beautifyFrequentWords(data)).toEqual([
     data[0].mostFrequentWord,
@@ -127,81 +161,37 @@ test("addRequest returns array and sum of lengths array elements <= 60 ", () => 
 // Components testing
 
 test("Item renders props correctly", () => {
-  const props = {
-    title: "title",
-    snippet: "snippet",
-    link: "link"
-  };
-  const component = mount(
-    <Item title={props.title} snippet={props.snippet} link={props.link} />
+  const component = mount(<Item {...props.Item} />);
+  expect(component.find(".title").text()).toBe(props.Item.title);
+  expect(component.find(".snippet").text()).toBe(props.Item.snippet);
+  expect(component.find(".title").props()).toHaveProperty(
+    "href",
+    props.Item.link
   );
-  expect(component.find(".title").text()).toBe(props.title);
-  expect(component.find(".snippet").text()).toBe(props.snippet);
-  expect(component.find(".title").props()).toHaveProperty("href", props.link);
 });
 
 test("Requests renders props correctly", () => {
-  const func = jest.fn();
-  const props = {
-    requests: ["wow", "how"],
-    setValue: func
-  };
-  const component = mount(
-    <Requests requests={props.requests} setValue={props.setValue} />
-  );
-  for (let index = 0; index < props.requests.length; index++) {
+  const component = mount(<Requests {...props.Requests} />);
+  for (let index = 0; index < props.Requests.requests.length; index++) {
     expect(
       component
         .find(".request")
         .at(index)
         .text()
-    ).toBe(props.requests[index]);
+    ).toBe(props.Requests.requests[index]);
   }
 });
 
 test("AjaxTime renders props correctly", () => {
-  const time = 10;
-  const component = mount(<AjaxTime ajaxTime={time} />);
+  const component = mount(<AjaxTime {...props.AjaxTime} />);
   expect(component.find(".ajaxTimeNumber").text()).toBe(
-    `${time.toFixed(5)} ms`
+    `${props.AjaxTime.ajaxTime.toFixed(5)} ms`
   );
 });
 
 test("Filter renders props correctly", () => {
-  const data = [
-    {
-      title: "title",
-      snippet: "snippet",
-      mostFrequentWord: "word_1",
-      link: "www.test.com"
-    },
-    {
-      title: "title",
-      snippet: "snippet",
-      mostFrequentWord: "word_2",
-      link: "www.test.com"
-    },
-    {
-      title: "title",
-      snippet: "snippet",
-      mostFrequentWord: "word_3",
-      link: "www.test.com"
-    },
-    {
-      title: "title",
-      snippet: "snippet",
-      mostFrequentWord: "word_3",
-      link: "www.test.com"
-    }
-  ];
-  const component = mount(
-    <Filter
-      data={data}
-      setFilteredData={jest.fn()}
-      setShowFilteredData={jest.fn()}
-    />
-  );
-  let mostFrequentWords = beautifyFrequentWords(data);
+  const component = mount(<Filter {...props.Filter} />);
+  let mostFrequentWords = beautifyFrequentWords(props.Filter.data);
 
   for (let index = 0; index < mostFrequentWords.length; index++) {
     expect(
@@ -214,7 +204,7 @@ test("Filter renders props correctly", () => {
 });
 
 test("Limit renders props correctly", () => {
-  const component = mount(<Limit limit={10} setLimit={jest.fn()} />);
+  const component = mount(<Limit {...props.Limit} />);
   const limitsArray = ["10", "50", "100"];
   for (let index = 0; index < limitsArray.length; index++) {
     expect(
@@ -229,64 +219,13 @@ test("Limit renders props correctly", () => {
 // Snapshots
 
 test("snapshots", () => {
-  const data = [
-    {
-      title: "title",
-      snippet: "snippet",
-      mostFrequentWord: "word_1",
-      link: "www.test.com"
-    },
-    {
-      title: "title",
-      snippet: "snippet",
-      mostFrequentWord: "word_2",
-      link: "www.test.com"
-    }
-  ];
   expect(shallow(<App />)).toMatchSnapshot();
-  expect(
-    shallow(<Item title={"title"} snippet={"snippet"} link={"link"} />)
-  ).toMatchSnapshot();
-  expect(shallow(<Toggle setDarkTheme={jest.fn()} />)).toMatchSnapshot();
-  expect(
-    shallow(
-      <Form
-        setData={jest.fn()}
-        value={"Title"}
-        setValue={jest.fn()}
-        requests={["wow", "how"]}
-        setAjaxError={jest.fn()}
-        setRequests={jest.fn()}
-        setAjaxTime={jest.fn()}
-        setShowFilteredData={jest.fn()}
-        setDataNotFound={jest.fn()}
-        setOpenStuff={jest.fn()}
-        limit={10}
-      />
-    )
-  ).toMatchSnapshot();
-  expect(
-    shallow(<Requests requests={["wow", "how"]} setValue={jest.fn()} />)
-  ).toMatchSnapshot();
-  expect(shallow(<AjaxTime ajaxTime={10} />)).toMatchSnapshot();
-  expect(
-    shallow(
-      <AjaxError
-        ajaxError={{
-          error: "No error",
-          status: false
-        }}
-      />
-    )
-  ).toMatchSnapshot();
-  expect(
-    shallow(
-      <Filter
-        data={data}
-        setFilteredData={jest.fn()}
-        setShowFilteredData={jest.fn()}
-      />
-    )
-  ).toMatchSnapshot();
-  expect(shallow(<Limit limit={10} setLimit={jest.fn()} />)).toMatchSnapshot();
+  expect(shallow(<Item {...props.Item} />)).toMatchSnapshot();
+  expect(shallow(<Toggle {...props.Toggle} />)).toMatchSnapshot();
+  expect(shallow(<Form {...props.Form} />)).toMatchSnapshot();
+  expect(shallow(<Requests {...props.Requests} />)).toMatchSnapshot();
+  expect(shallow(<AjaxTime {...props.AjaxTime} />)).toMatchSnapshot();
+  expect(shallow(<AjaxError {...props.AjaxError} />)).toMatchSnapshot();
+  expect(shallow(<Filter {...props.Filter} />)).toMatchSnapshot();
+  expect(shallow(<Limit {...props.Limit} />)).toMatchSnapshot();
 });

@@ -212,6 +212,13 @@ exports[`snapshots 8`] = `
     >
       word_2
     </li>
+    <li
+      className="word"
+      key="2"
+      onClick={[Function]}
+    >
+      word_3
+    </li>
   </ul>
 </div>
 `;
